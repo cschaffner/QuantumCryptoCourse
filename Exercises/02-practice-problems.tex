@@ -1,0 +1,121 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\tr}{\mathrm{tr}}
+
+%% Settings
+\newcommand\problemset{2}
+\newcommand\deadline{Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+
+\begin{document}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[Purifications (Problem 1 of Chapter 2)]
+Alice and Bob share a pure state divided between them as follows: Alice holds a $d$-dimensional qudit, i.e. a system with basis states labeled $\{ \ket{0}, \ket{1}, \ldots, \ket{d-1} \}$ for some $d$. Bob, on the other hand, holds some number $m \geq 0$ of qu{\bf b}its.
+
+Suppose Alice's qudit is in state $\rho_A$ as specified below. In each case, what is the minimum number of qubits Bob can have, given that the joint state is pure? Give a possible purified state.
+\begin{enumerate}
+\item $\rho_A = \frac12( \ket{0}\bra{0}+\ket{3}\bra{3})$
+\item $\rho_A = \frac{1}{4}( \ket{0}\bra{0} +\ket{1}\bra{1}+\ket{2}\bra{2}+\ket{3}\bra{3})$
+\item $\rho_A = \frac{1}{4}(\ket{1}\bra{1}+\ket{2}\bra{2}+\ket{3}\bra{3}) + \frac{1}{8} ( \ket{4}\bra{4} + \ket{4}\bra{5} + \ket{5} \bra{4} + \ket{5} \bra{5} )$
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[A secret shared among three people (Problem 4 of Chapter 2)]
+
+In class you learned about sharing a classical secret among two people using an entangled state. Here we will create a scheme that shares a classical secret among three people: Alice, Bob and Charlie. We will do that by giving Alice, Bob and Charlie a GHZ-like state of the form
+\[ \ket{\psi_b} = \frac{1}{\sqrt{2}} (\ket{0}_A\ket{0}_B \ket{0}_C + (-1)^b \ket{1}_A\ket{1}_B \ket{1}_C)\]
+with $b \in \{0,1\}$ being the 'secret' we want to share. 
+
+\begin{subex}
+Now imagine Alice wants to perform a local measurement on her qubit to find the secret bit. What is her reduced density matrix? Convince yourself that this means that Alice can not find the secret on her own.
+\end{subex}
+
+\begin{subex}
+Now imagine that Alice and Bob would like to discover the secret bit without Charlie being involved. What would their reduced state look like?
+
+Convince yourself that the same holds for the combinations BC and AC and that this implies that they can not find the secret!
+\end{subex}
+
+\begin{subex}
+Now let's imagine a terrible snowstorm keeps Alice, Bob and Charlie confined to their houses. They have however the ability to apply operations to their own qubits, measure them, and they also each possess a radio through which they can communicate classical information. They would like to find out the secret bit. However they want to also do it in a way that guarantees that they succeeded, i.e. they want to perform a protocol which finds b with probability 1. How can they do it?
+
+{\bf Hint:} Let all three players measure their qubit in the Hadamard basis.
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[CHSH game (Problem 5 of Week 2)]
+
+\begin{subex}
+Alice and Bob would like to play the CHSH game. Sadly they do not possess a machine that can generate entanglement at will, instead they have a machine that can generate the following bipartite quantum states.
+\begin{align*}
+\rho_1 &= \frac{3}{4}\ket{\Phi}\bra{\Phi} + \frac{1}{16} \mathbbm{1} \, , \\
+\rho_2 &= \ket{00}\bra{00}
+\end{align*}
+with $\ket{\Phi} = \frac{1}{\sqrt{2}} (\ket{00} + \ket{11})$ being the EPR pair. Alice and Bob would like to use the state that produces the highest CHSH value. Which one of these would generate the highest CHSH value (using any possible measuring scheme)?
+\end{subex}
+
+\begin{subex}
+Now imagine that Alice and Bob try to build a better machine, one which produces the EPR pair (which they know will give them the highest possible CHSH value). Sadly their machine doesn't quite produce the EPR pair. Instead it produces the state $\ket{\Phi_i}$ with probability $p_i=0.25$ one of the following states
+\begin{align*}
+\ket{\Phi_0} &= \frac{1}{\sqrt{2}} ( \ket{00} + \ket{11} ) \\
+\ket{\Phi_1} &= \frac{1}{\sqrt{2}} ( \ket{00} - \ket{11} ) \\
+\ket{\Phi_2} &= \frac{1}{\sqrt{2}} ( \ket{01} + \ket{01} ) \\
+\ket{\Phi_3} &= \frac{1}{\sqrt{2}} ( \ket{01} - \ket{01} ) \\
+\end{align*}
+and also tells Alice and Bob which state it produces. Alice and Bob are quite happy with their efforts because all of these states will give them the maximal CHSH value (they are maximally entangled). The easiest way to see that this is true is by noting that all of these states can be transformed to the EPR by Bob applying an operation to his qubit based on the number $i \in \{0,1,2,3\}$ he gets from the machine. We denote the operation Bob applies when he receives $i$ by $U_i$. Which operations should Bob apply in order to change the outputted state to the EPR pair?
+\end{subex}
+
+\begin{subex}
+Now imagine that the part of the machine that tells Alice and Bob which state $\ket{\Phi_i}$ it produces breaks! This means that they don't know which state the machine outputs. What is now their probability of winning the CHSH game if they apply the strategy that is optimal for the EPR pair? (Tip: write down the density matrix they now possess)
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[Robustness of GHZ and W states (Problem 2 of Week 2)]
+
+Remember that $\left| W_ N \right\rangle := \frac{1}{\sqrt{N}}\sum_{i=1}^N \underset{1\text{ at the $i$-th place}}{\underbrace{\ket{0\cdots 010\cdots 0}}}$ is an equal superposition of all N-bit strings with exactly one 1 and N-1 0's and
+$\left| GHZ_ N \right\rangle :=\frac{1}{\sqrt {2}} (\left| 0 \right\rangle ^{\otimes N}+\left| 1 \right\rangle ^{\otimes N})$
+
+In this module you learned to distinguish product states from (pure) entangled states by calculating the Schmidt rank of $\ket{\Psi}_{AB}$, i.e. the rank of the reduced state $\rho_A=\tr_B \ket{\Psi}\bra{\Psi}$. In particular $\ket{\Psi}$ is pure if and only if its Schmidt rank is 1. In the following, we denote by $\tr_N$ the operation of tracing out only the last of $N$ qubits.
+
+\begin{subex}
+What are the ranks of $\tr_N \ket{GHZ_N}\bra{GHZ_N}$ and of $\tr_N \ket{W_N}\bra{W_N}$, respectively? (Note that these are the Schmidt ranks of $ \ket{GHZ_N}$ and  $\ket{W_N}$ if we partition each of them between the first $N-1$ qubits and the last qubit.)
+\end{subex}
+
+\begin{subex}
+Let us now introduce a more discriminating (in fact, continuous) measure of the entanglement of a state $\ket{\Psi}_{AB}$: namely, the \emph{purity of the reduced state} $\rho_A$ given by $\tr \rho_A^2$. First let's see how this works in practice with the extreme cases in d dimensions:
+
+What are the purities $\tr \rho^2$ for $\rho = \ket{0}\bra{0}$ and the ''maximally mixed`` state $\rho = \frac{1}{d} \mathbbm{1}$, respectively?
+\end{subex}
+
+\begin{subex}
+Now consider again the behavior of the $N$-qubit GHZ and W states with one qubit discarded (i.e. traced out): What is the purity of $\tr_N \ket{GHZ_N}\bra{GHZ_N}$ in the limit $N\rightarrow \infty$?
+\end{subex}
+
+\begin{subex}
+What is the purity of $\tr_N \ket{W_N}\bra{W_N}$ in the limit $N\rightarrow \infty$?
+\end{subex}
+
+\end{exercise}
+
+
+
+
+\end{document}
