@@ -1,0 +1,11 @@
+UBQC: https://arxiv.org/pdf/0807.4154.pdf
+Quantum rewinding / ZK: https://arxiv.org/pdf/quant-ph/0511020.pdf
+Quantum money and bomb testing: https://arxiv.org/pdf/1404.1507.pdf
+Impossibility of 2PC: https://arxiv.org/pdf/1201.0849.pdf
+QKD proof: https://arxiv.org/pdf/1506.08458.pdf
+Computational security: https://arxiv.org/pdf/1602.01441.pdf
+QFHE: https://arxiv.org/pdf/1603.09717.pdf
+Quantum PRFs: https://www.cs.princeton.edu/~mzhandry/docs/papers/QPRFs.pdf
+Quantum collisions: https://www.cs.princeton.edu/~mzhandry/docs/papers/QCol.pdf
+Garden-hose model / PV: https://arxiv.org/pdf/1109.2563.pdf
+Timed-release encryption: http://eprint.iacr.org/2013/606.pdf
