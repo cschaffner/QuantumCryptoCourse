@@ -28,7 +28,7 @@ You do not have to hand in these exercises, they are for practicing only. %Probl
 }
 
 \begin{exercise}[Purifications (Problem 1 of Chapter 2)]
-Alice and Bob share a pure state divided between them as follows: Alice holds a $d$-dimensional qudit, i.e. a system with basis states labeled $\{ \ket{0}, \ket{1}, \ldots, \ket{d-1} \}$ for some $d$. Bob, on the other hand, holds some number $m \geq 0$ of qu{\bf b}its.
+Alice and Bob share a pure state divided between them as follows: Alice holds a $d$-dimensional qudit, i.e. a system with basis states labeled $\{ \ket{0}, \ket{1}, \ldots, \ket{d-1} \}$ for some $d$. Bob, on the other hand, holds some number $m \geq 0$ of qu\textbf{b}its.
 
 Suppose Alice's qudit is in state $\rho_A$ as specified below. In each case, what is the minimum number of qubits Bob can have, given that the joint state is pure? Give a possible purified state.
 \begin{enumerate}
@@ -57,8 +57,13 @@ Convince yourself that the same holds for the combinations BC and AC and that th
 \begin{subex}
 Now let's imagine a terrible snowstorm keeps Alice, Bob and Charlie confined to their houses. They have however the ability to apply operations to their own qubits, measure them, and they also each possess a radio through which they can communicate classical information. They would like to find out the secret bit. However they want to also do it in a way that guarantees that they succeeded, i.e. they want to perform a protocol which finds b with probability 1. How can they do it?
 
-{\bf Hint:} Let all three players measure their qubit in the Hadamard basis.
+\textbf{Hint:} Let all three players measure their qubit in the Hadamard basis.
 \end{subex}
+
+\begin{subex}
+Invent a classical secret-sharing scheme for three parties where any group of two players can recover the secret, but any individual player does not know anything about the secret.
+\end{subex}
+
 \end{exercise}
 
 \begin{exercise}[CHSH game (Problem 5 of Week 2)]
