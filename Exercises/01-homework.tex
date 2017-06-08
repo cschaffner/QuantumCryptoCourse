@@ -7,7 +7,7 @@
 
 %% Settings
 \newcommand\problemset{1}
-\newcommand\deadline{Friday November 18th, 20:00h}
+\newcommand\deadline{Friday June 16, 20:00h}
 \newif\ifcomments
 \commentsfalse % hide comments
 %\commentstrue % show comments
@@ -24,22 +24,22 @@
 
 {\sffamily\noindent
 %This week's exercises deal with sets, counting and uniform probabilities.
-You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Moodle no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
 }
 
 
 \begin{exercise}[Purity]
 Purity of a quantum state is defined as $\Tr\rho^2$. Consider a $d$-dimensional quantum state $\rho\in \mathbb{C}^{d\times d}$.
 \begin{subex}
-What is the maximal value of purity, what class of states achieve this value.
+What is the maximal value of purity, and what states achieve this value?
 \end{subex}
 
 \begin{subex}
-What is the minimal value of purity, what state achieves this value.
+What is the minimal value of purity, what state achieves this value?
 \end{subex}
 
 \begin{subex}
-Any qubit density matrix can be represented by the Bloch vector $\vec{r}$, satisfying $|\vec{r}|\leq 1$. For any quantum state $\tau\in \mathbb{C}^{2\times 2}$ we have that $\tau= \frac{1}{2}\left( \mathbbm{1} + \vec{r}\cdot \vec{\sigma} \right)$, where $\vec{\sigma}=(\sigma_x,\sigma_y,\sigma_z)^T$ is the vector of Pauli matrices. How does purity of $\tau$ relate to $\vec{r}$.
+Any qubit density matrix can be represented by the Bloch vector $\vec{r}$, satisfying $|\vec{r}|\leq 1$. For any quantum state $\tau\in \mathbb{C}^{2\times 2}$ we have that $\tau= \frac{1}{2}\left( \mathbbm{1} + \vec{r}\cdot \vec{\sigma} \right)$, where $\vec{\sigma}=(\sigma_x,\sigma_y,\sigma_z)^T$ is the vector of Pauli matrices. How does purity of $\tau$ relate to $\vec{r}$?
 \end{subex}
 
 \end{exercise}
@@ -81,6 +81,10 @@ $\left| W_ N \right\rangle= \frac{1}{\sqrt{N}}\sum_{i=1}^N \underset{1\text{ at 
 
 What is the overlap $\text {Tr}\Big(\left| W_{N-1} \right\rangle \left\langle {W_{N-1}}\right| \text {tr}_ N\left(\left| W_ N \right\rangle \left\langle W_N \right|\right)\Big)$ in the limit $N \rightarrow \infty$? 
 \end{subex}
+\end{exercise}
+
+\begin{exercise}[Relation between min-entropy and ignorance]
+	Let $K$ be a classical (key) register, and let $E$ be Eve's quantum register. Prove the following statement for arbitrary classical-quantum states $\rho_{KE}$: Eve is ignorant about $K$ if and only if $H_{min}(K|E) = \log|K|$.
 \end{exercise}
 
 
