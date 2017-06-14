@@ -39,6 +39,23 @@ You are given one of three states $\rho_0 = \ket0\bra0$, $\rho_1 = \frac{1}{2}\i
 \end{subex}
 \end{exercise}
 
+\begin{exercise}[Negligible functions]
+	A function $f: \mathbb{N} \to \mathbb{R}$ is called negligible if for any $c \in \mathbb{N}_+$, there exists an integer $n_c$ such that for all $n > n_c$ we have
+	\[
+	|f(n)| < \frac{1}{n^c}.
+	\]
+	\begin{subex}
+		Show that $f(n) = 2^{-(\log(n))^2}$ is negligible.
+	\end{subex}
+	\begin{subex}
+		Show that if $f(n)$ and $g(n)$ are negligible, then so is $h(n) = f(n) + g(n)$.
+	\end{subex}
+	\begin{subex}
+		Similarly, show that if $f(n)$ is negligible, and $g(n) \in O(n^d)$ for some $d \in \mathbb{N}$, then so is $h(n) = f(n) \cdot g(n)$. Can you see why negligible functions are useful to bound the success probability of an adversary?
+	\end{subex}
+	
+\end{exercise}
+
 \begin{exercise}[2-universality]
 Let $\mathscr{F} = \{f_y : \{0,1\}^n \to \{0,1\}^m\}$ be a 2-universal family of hash functions. For some $m' < m$, define $\mathscr{F}' = \{f'_y : \{0,1\}^n \to \{0,1\}^{m'}\}$ by $f_y'(x) = f_y(x)_{|m'}$, that is, the first $m'$ bits of $f_y(x)$. Show that $\mathscr{F}'$ is also 2-universal.
 \end{exercise}
@@ -54,20 +71,6 @@ Let $\mathscr{F} = \{f_y : \{0,1\}^n \to \{0,1\}^m\}$ be a 2-universal family of
     \begin{subex}
     	Alice and Bob are impressed by the parameter $\epsilon = 0$ in the previous exercise. They decide that if $\mathscr{F}$ can be used for a $(k,0)$-weak seeded randomness extractor, then certainly it can reasonably be used as a \textbf{strong} seeded randomness extractor as well. They define $\text{Ext}(x,y) = f_y(x)$. Do you think this is a good idea? How does Eve's guessing probability change after extraction?
     \end{subex}
-\end{exercise}
-
-\begin{exercise}[Negligible functions]
-	A function $f: \mathbb{N} \to \mathbb{R}$ is called negligible if for any $c \in \mathbb{N}_+$, there exists an integer $n_c$ such that for all $n > n_c$ we have
-	\[
-	|f(n)| < \frac{1}{n^c}.
-	\]
-	\begin{subex}
-		Show that $f(n) = 2^{-n}$ is negligible. (Hint: use the fact that for large enough $n$, $\sqrt{n} \geq \log n$.)
-	\end{subex}
-    \begin{subex}
-    	Show that if $f_1$ and $f_2$ are negligible, then so is $f_1 + f_2$.
-    \end{subex}
-
 \end{exercise}
 
 \begin{exercise}[Deterministic extractors on bit-fixing sources]
