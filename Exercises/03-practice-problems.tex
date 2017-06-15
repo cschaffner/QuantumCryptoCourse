@@ -55,20 +55,17 @@ $\rho_{KE} = \frac{1}{2}(\ket{00}_K \ket0_E)(\bra{00}_K\bra0_E) + \frac{1}{2}(\k
 \begin{subex}
 $\rho_{KE} = \frac{3}{4} (\ket{0}_K\ket0_E)(\bra{0}_K\bra0_E) + \frac{1}{4} (\ket{1}_K\ket{\circlearrowright}_E)(\bra{1}_K\bra\circlearrowright_E)$, where $\ket{\circlearrowright} = \frac{1}{\sqrt{2}}(\ket0 + i \ket1)$.
 \end{subex}
-\begin{subex}
-	Let $K$ be a classical (key) register, and let $E$ be Eve's quantum register. Prove the following statement for arbitrary classical-quantum states $\rho_{KE}$: Eve is ignorant about $K$ if and only if $H_{min}(K|E) = \log|K|$.
-\end{subex}
 \end{exercise}
 
 \begin{exercise}[Winning probability in the bipartite guessing game]
 Recall the bipartite guessing game: Eve prepares a state $\rho_{AE}$, and sends the $A$ register to Alice. Alice chooses a random basis $\theta \in \{0,1\}$, and measures $\rho_A$ in the computational basis if $\theta = 0$ or in the Hadamard basis if $\theta = 1$. She records the outcome $X$. Eve has to guess $X$, based on her state $\rho_E$ and on $\theta$. She wins if she guesses correctly.
 
 \begin{subex}
-If $\rho_E$ is has zero dimension (that is, Eve is not allowed to hold back any information), what is the maximum winning probability for Eve? What state $\rho_A$ should she prepare?
+If $E$ is has zero dimension (that is, Eve is not allowed to hold back any information), what is the maximum winning probability for Eve? What state $\rho_A$ should she prepare?
 \end{subex}
 
 \begin{subex}
-If $\rho_E$ is has higher dimension (that is, Eve is allowed to keep an entangled state), what is the maximum winning probability for Eve? What state $\rho_{AE}$ should she prepare?
+If $E$ is has higher dimension (that is, Eve is allowed to keep an entangled state), what is the maximum winning probability for Eve? What state $\rho_{AE}$ should she prepare?
 \end{subex}
 \end{exercise}
 
