@@ -1,0 +1,46 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{2}
+\newcommand\deadline{Friday June 23, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\newcommand{\Hmin}{\mathrm{H}_{\mathrm{min}}}
+
+\homeworkproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Moodle no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+
+\begin{exercise}[Min-Entropy Chain rule for cq-states]
+Let $\rho_{XE} = \sum_x P_X(x) \ket{x}\bra{x} \otimes \rho_E^x$ be a cq-state. Prove the following chain rule:
+\[
+\Hmin(X | E) \geq \Hmin(X) - \log |E| \, .
+\]
+\textbf{Hint: } Use the fact that $0 \leq \rho_E^x \leq \mathbbm{1}$.
+
+\end{exercise}
+
+
+
+
+
+\end{document}
