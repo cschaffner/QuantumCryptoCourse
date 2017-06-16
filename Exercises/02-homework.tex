@@ -16,6 +16,7 @@
 \usepackage[english]{exercises}
 \usepackage{wasysym}
 \usepackage{hyperref}
+\usepackage{mathrsfs} 
 \hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
 \usepackage{bbm}
 \begin{document}
@@ -40,6 +41,22 @@ Let $\rho_{XE} = \sum_x P_X(x) \ket{x}\bra{x} \otimes \rho_E^x$ be a cq-state. P
 
 \begin{exercise}[injective functions are collapsing]
 Show that an injective function is collapsing, i.e. give a proof of Lemma~2 of \href{http://homepages.cwi.nl/~schaffne/spool/sponges.pdf}{our recent paper}. You can ignore the oracles $\mathcal{O}$ in the statement of Lemma 2 and in Definition~1.
+\end{exercise}
+
+\begin{exercise}[A weak seeded extractor]
+	For any $y \in \{0,1\}^n$, define $f_y : \{0,1\}^n \to \{0,1\}^n$ by $f_y(x) = x \oplus y$. Here, $\oplus$ represents the bitwise parity (e.g., $11 \oplus 01 = 10$).
+	\begin{subex}
+		Show that the family $\mathscr{F} = \{f_y\}$ is 1-universal.
+	\end{subex}
+        \begin{subex}
+          Show that the family $\mathscr{F} = \{f_y\}$ is not 2-universal.
+        \end{subex}
+        \begin{subex}
+    	How could you use $\mathscr{F}$ to build a $(k,0)$-weak seeded randomness extractor $\text{Ext} : \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$ for any $k$. Is this extractor useful?
+    \end{subex}
+    \begin{subex}
+    	Alice and Bob are impressed by the parameter $\epsilon = 0$ in the previous exercise. They decide that if $\mathscr{F}$ can be used for a $(k,0)$-weak seeded randomness extractor, then certainly it can reasonably be used as a \textbf{strong} seeded randomness extractor as well. They define $\text{Ext}(x,y) = f_y(x)$. Do you think this is a good idea? How does Eve's guessing probability change after extraction?
+    \end{subex}
 \end{exercise}
 
 
