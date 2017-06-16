@@ -55,7 +55,7 @@ Show that an injective function is collapsing, i.e. give a proof of Lemma~2 of \
     	How could you use $\mathscr{F}$ to build a $(k,0)$-weak seeded randomness extractor $\text{Ext} : \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$, for any $0 \leq k \leq n$? Is this extractor useful?
     \end{subex}
     \begin{subex}
-    	Alice and Bob are impressed by the parameter $\epsilon = 0$ in the previous exercise. They decide that if $\mathscr{F}$ can be used for a $(k,0)$-weak seeded randomness extractor, then certainly it can reasonably be used as a \textbf{strong} seeded randomness extractor as well. They define $\text{Ext}(x,y) = f_y(x)$. Do you think this is a good idea? How does Eve's guessing probability change after extraction?
+    	Alice and Bob have a $k$-source $X$ for some $k < n$. They are impressed by the parameters in the previous subexercise, and decide to use $\mathscr{F}$ to build a strong seeded randomness extractor as well. They know they should not expect to securely extract more than $k$ bits of key, so they define $\text{Ext}(x,y) := (x_1 \oplus y_1, ..., x_k \oplus y_k)$, that is, the first $k$ bits of $f_y(x)$. (From the exercise session, they know how to show that this set of functions is still 1-universal). Do you think this is a good idea? Give a lower bound to Eve's probability of guessing the key.
     \end{subex}
 \end{exercise}
 
