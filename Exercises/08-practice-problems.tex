@@ -1,0 +1,118 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{8}
+\newcommand\deadline{Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\newcommand{\Hi}{\mathcal{H}}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[A Weak Coin-Flipping Protocol (Problem 1 of Chapter 8)]
+In these week's lectures, you have been presented with an example of a strong quantum coin flipping protocol with bias $1/4$. In this problem you'll see how a variation of that same protocol allows to construct a weak coin flipping protocol with bias smaller than $1/4$. This is still far from the best weak coin flipping protocol that we know of (in fact weak coin flipping protocols exist with arbitrarily small bias), but it is still instructive to consider, and to go through its security. 
+Recall that in a weak coin flipping protocol, one of the outcomes is identified with "Alice wins" and the other with "Bob wins", so each player hopes for just one of the two outcomes. In this context, for a cheating Alice and honest Bob, we define Alice's cheating probability as $P_A^*=\Pr[\text{Alice wins}]$, maximized over Alice's (cheating) strategies, and similarly $P_B^∗$ for Bob, and we say that the cheating probability of the protocol is $\max\{P_A^∗,P_B^∗\}$. The protocol in this problem is parametrised by $\alpha \in [0,\pi]$, over which you'll optimise later on. 
+We use the term "qutrit" to refer to a quantum state in the space $\mathbb{C}^3$, i.e. a state of the form $\alpha_0\ket{0}+\alpha_1\ket{1} + \alpha_2 \ket{2}$. For $a,x \in \{0,1\}$, define the qutrit state $\ket{\psi_{a,x}}$ in the space $\mathcal{H}_t = \mathbb{C}^3$ as
+\[
+\ket{\psi_{a,x}} = \cos(\frac{\alpha}{2}) \ket{0} + \sin(\frac{\alpha}{2}) (-1)^x \ket{a+1}
+\]
+and $\ket{\psi_a} \in \mathcal{H}_s \otimes \mathcal{H}_t = \mathbb{C}^2 \otimes \mathbb{C}^3$ as 
+\[
+\ket{\psi_a} = \frac{1}{\sqrt{2}} ( \ket{0} \ket{\psi_{a,0}} + \ket{1} \ket{\psi_{a,1}} ) \, .
+\]
+
+The protocol runs as follows:
+\begin{enumerate}
+\item Alice picks $a \in_R \{0,1\}$, prepares the state $\ket{\psi_a} \in \mathcal{H}_s \otimes \Hi_t$ (i.e.\ a state of one qubit and one qutrit) and sends to Bob the right half of the state (the qutrit).
+\item Bob picks $b \in_R \{0,1\}$ and sends it to Alice.
+\item Alice then reveals the bit $a$ to Bob. Let $c=a \oplus b$. If $c=0$, then Alice sets $c_A=0$ and sends to Bob the other part of the state $\ket{\psi_a}$ (the qubit). Bob checks that the qutrit-qubit pair he received is indeed in the state $\ket{\psi_a}$ (by taking a measurement with respect to any orthogonal basis of $\Hi_s \otimes \Hi_t$ containing $\ket{\psi_a}$). If the test is passed, Bob sets $c_b=0$, and so Alice wins, else Bob concludes that Alice has deviated from the protocol, and aborts.
+\item If, on the other hand, $c=a \oplus b=1$, then Bob sets $c_B=1$, and returns the qutrit he received in round 1. Alice checks that her qubit-qutrit pair is in state $\ket{\psi_a}$. If the test is passed, she sets $c_A=1$ so Bob wins the game, else Alice concludes that Bob has tampered with her qutrit to bias the game, and aborts.
+\end{enumerate}
+
+It is clear that if both players are honest, then the protocol is fair. We'll analyse what happens when one of the players cheats and the other is honest.
+
+\begin{subex}
+What is Bob's reduced density matrix $\rho_a$ after step 1, in the case that Alice has prepared the honest state $\ket{\psi_a}$? (note that the subscript a refers to the classical bit and not the system of Alice or Bob.)
+\end{subex}
+
+\begin{subex}
+Now, suppose Bob is honest and Alice potentially cheats. We intend to obtain a (tight) bound on Alice's winning probability. 
+The most general strategy is for Alice to prepare a pure state $\ket{\phi} \in \Hi \otimes \Hi_s \otimes \Hi_t$ where $\Hi$ is an ancillary space (one can always purify the state via $\Hi$). Then she sends the qutrit part in $\Hi_t$ to Bob, and keeps the part of the state in $\Hi \otimes \Hi_s$. 
+We can assume without loss of generality that in step 3 of the protocol Alice always replies with $a=b$ (so that $c=0$), and consequently tries to pass Bob's check. For this, she performs a unitary $U_b$ on her part of $\ket{\phi}$, so that she gets $\ket{\phi_b}=(U_b \otimes I) \ket{\phi}$, and then sends the qubit in $\Hi_s$ to Bob. The final joint state can then be written as $\ket{\phi_b} = \sum_i \sqrt{p_i} \ket{i} \ket{\phi_{i,b}}$ for some $p_i$'s and Schmidt bases $\{ \ket{i} \}$ of $\Hi$ and $\{ \ket{\phi_{i,b}} \}$ of $\Hi_s \otimes \Hi_t$. 
+
+Now, recall the interpretation of the fidelity between to density matrices as the square root of the probability that Alice can convince Bob that one is the other. Let $\sigma_b$ be the density matrix of Bob's qubit-qutrit pair at the end of the protocol. And let $\sigma$ be Bob's reduced density matrix after the first step of the protocol (i.e. just the qutrit).
+
+Upper bound the probability $\Pr[\text{Alice wins} \mid \text{Bob sent $b$}]$ that Alice wins given that Bob sent $b$.
+\textbf{Hint: }express it first in terms of the fidelity of two density matrices and then use the fact that fidelity is non-decreasing under taking partial trace.
+\end{subex}
+
+\begin{subex}
+Remember the property of fidelity that for any three density matrices σ,ρ0,ρ1, it holds that F2(σ,ρ0)+F2(σ,ρ1)≤1+F(ρ0,ρ1). 
+Use this fact to bound the probability that Alice wins.
+\end{subex}
+
+\end{exercise}
+
+\begin{exercise}[Key rate with special channels]
+\begin{subex}[Problem 2.1]
+In class you saw how Alice and Bob could establish key in the presence of a limited Eve. In particular you saw a situation where Alice and Bob possessed a channel which allowed them to send classical bits such that Eve would obtain the bit with probability $q$ (which is known to Eve!) and would obtain the flipped bit with probability $1-q$. Just to check if you were paying attention, please calculate the amount of min entropy Eve would have about a bit that Alice sent to Eve for the following values of $q$ (up to two decimal places): $q=1/4$, $q=3/5$, $q=9/10$.
+\end{subex}
+
+\begin{subex}[Problem 2.2]
+For which values of $q$ would we be able to use this channel to create keys?
+\end{subex}
+
+\begin{subex}[Problem 2.3]
+Now imagine we are in the situation where Eve has a limited classical memory of size $k$ bits. Imagine Alice sends Bob $n$ bits through a public channel (of which Eve can copy and store $k$). Let's take for example $k=1000$. What would Eve's min-entropy be (about the string of $n$ bits) in the following situations? (enter a number!). I case of $n<k$, $n=k$, and $n=10k$.
+\end{subex}
+\end{exercise}
+
+
+\begin{exercise}[Information reconciliation]
+\begin{subex}[Problem 3.1]
+In class you saw an information reconciliation protocol based on the parity check matrix
+\begin{equation}
+H = \begin{pmatrix} 1 & 1 & 0\\ 0 & 1 & 1 \end{pmatrix}
+\end{equation}
+
+This protocol could reliably correct a single bit flip error on blocks of three bits. If we assume that every key bit distributed is flipped with probability p and remains unchanged with probability $1-p$ we could derive that the probability of correctly distributing a three bit string without error correction was $p_{succ} = (1-p)^3$
+while using the error correction scheme based on $H$ we had $p_{succ} = 1-3p^2 + 2p^3$
+which is of course quite a bit better for small $p$. Now the question is, can we do even better? Here we will look at a simple expansion of the three bit linear code from class and look at the seven bit code generated by the parity check matrix
+\begin{equation}
+H = \begin{pmatrix} 0& 0& 0& 1& 1& 1& 1 \\ 0& 1& 1& 0& 0& 1& 1\\ 1& 0& 1& 0& 1& 0& 1 \end{pmatrix}.
+\end{equation}
+This code, which can also correct a single error, can also be found in the Julia labs. Here we will investigate the robustness of this code to errors. Let's set a baseline by looking at the probability of successfully distributing a seven bit string using no error correction when all bits in the string are affected by a binary symmetric channel which flips bits with probability $p$. What is the probability of successfully distributing an error-free string?
+\end{subex}
+
+\begin{subex}[Problem 3.2]
+Of course this code is not magical, i.e. we will never be able to reliably correct all errors. To see why this is the case let is look at the error strings $S = 1000000$ and $S' = 0110000$. Can we correct both $S$ and $S'$, what are the syndromes of those error strings?
+\end{subex}
+\begin{subex}[Problem 3.3]
+Now, assuming we use the information reconciliation scheme from the videos with the matrix $H$ and a string of seven bits. Assuming the probability of flipping a bit is again given by $p$, and we can reliably correct single bit errors, what is the probability that we can successfully distribute an error free key?
+\end{subex}
+\end{exercise}
+
+
+
+
+\end{document}
