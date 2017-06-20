@@ -29,6 +29,19 @@
 You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
 }
 
+\begin{exercise}[Quantum Bit Commitment (Problem 1 from Section 9.1)]
+Consider the following protocol for a bit commitment: Alice prepares $\ket{\psi_0}|ψ0⟩_{AB}=\frac{1}{\sqrt{2}} ( \ket{00} + \ket{11})$ if she commits to $x=0$ or she prepares $\ket{\psi_1}_{AB} = \frac{1}{\sqrt{2}}  ( \ket{00} - \ket{11})$, if she commits to $x=1$. Then she sends the register $B$ to Bob. Finally, in the open phase, Alice just sends Bob her register $A$, so that Bob can perform a measurement in the Bell basis on the two qubits in registers $A$ and $B$ to learn Alice's bit. 
+Is this protocol correct, hiding and binding?
+\end{exercise}
+
+\begin{exercise}[OT in the noisy-storage model with unbounded Alice, Problem 1 in 9.3]
+In the described protocol for Oblivious Transfer in the limited-quantum-storage setting, honest Alice and Bob need no quantum memory, that is the quantum memory would only be convenient for the adversary that is trying to break the protocol. Does that mean that if Alice possessed an unbounded and noise-free quantum memory, then the protocol would not be secure against cheating Alice anymore?
+\end{exercise}
+
+\begin{exercise}[WSE without quantum memory, Problem 1 in 9.5]
+Consider a quantum implementation of the weak-string erasure, where Bob has no quantum memory. For a given qubit from Alice, what is his optimal probability of guessing Alice's encoded bit, if he is allowed to measure in any basis?
+\end{exercise}
+
 \begin{exercise}[Fun with PR boxes (Homework Problems 1-5 of Chapter 9)]
 In this homework, we will investigate side stepping the impossibility proof in some fun other ways! Similar to the setting of the wizard who gave Alice and Bob special forms of randomness, we'll imagine that they are given some very special resources that they can use during their protocol. We start our investigations with Alice and Bob having access to a very special box - also known as a PR-box or non-local box - used in the study of quantum non-locality. 
 
