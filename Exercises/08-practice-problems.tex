@@ -57,8 +57,8 @@ Compute Bob's cheating probability $P_B^*$ by recalling the operational interpre
 \begin{subex}
 Next, let's calculate Alice's cheating probability. Let the underlying Hilbert space be $\Hi \otimes \Hi_s \otimes \Hi_t$, where $\Hi_t$ corresponds to the qutrit that is sent to Bob in the commit phase, $\Hi_s$ to the qutrit that is sent during the opening phase, and $\Hi$ is any auxiliary system that Alice might use. For the most general strategy, we can assume that she prepares the pure state $\ket{\phi}$, as it can always be purified on $\Hi$.
 
-We can write $\ket{\phi} = \sum_i \sqrt{p_i} \ket{i} \ket{\tilde{\psi}_{i}}$ where $\{\ket{i}\}$ and $\{ \ket{\tilde{\psi}_{i}} \}$ are Schmidt bases of $\Hi$ and $\Hi_s \otimes \Hi_t$ respectively. So, the reduced density matrix on $\Hi_s \otimes \Hi_t$ is $\sigma_{s,t} = \sum_i p_i \ket{\tilde{\psi}_{i}}\bra{\tilde{\psi}_{i}}$. Moreover, let $\sigma_t$ be Bob's reduced density matrix after the commit phase, i.e. just a qutrit.
-Now, compute the probability of dishonest Alice successfully opening bit $b$ in terms of the fidelity between the states $\ket{\psi_b}$ and $\sigma_{s,t}$.
+We can write $\ket{\phi} = \sum_i \sqrt{p_i} \ket{i} \ket{\tilde{\psi}_{i,b}}$ where $\{\ket{i}\}$ and $\{ \ket{\tilde{\psi}_{i,b}} \}$ are Schmidt bases of $\Hi$ and $\Hi_s \otimes \Hi_t$ respectively. Note that depending on the bit $b$ Alice tries to open, she can use a different Schmidt basis of $\Hi_s \otimes \Hi_t$. Hence, the reduced density matrix on $\Hi_s \otimes \Hi_t$ is $\sigma^b_{s,t} = \sum_i p_i \ket{\tilde{\psi}_{i,b}}\bra{\tilde{\psi}_{i,b}}$. However, the part in $\Hi_t$ which is sent to Bob in the commitment phase does not depend on $b$ and we use $\sigma_t$ to denote Bob's reduced density matrix after the commit phase, i.e. just a qutrit.
+Now, compute the probability of dishonest Alice successfully opening bit $b$ in terms of the squared fidelity between the states $\ket{\psi_b}$ and $\sigma^b_{s,t}$.
 \end{subex}
 
 \begin{subex}

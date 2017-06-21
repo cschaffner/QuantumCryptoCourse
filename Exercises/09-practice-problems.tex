@@ -73,7 +73,7 @@ Now imagine we get an upgraded version of the same box. This box takes a bit str
 
 Alice and Bob would like to use this box, and classical communication from Alice to Bob, to design another protocol for some form 1-2 oblivious transfer of strings. That is, Alice has two strings $s_0,s_1$ and Bob has a bit $b$ and at the end of the protocol we would like Bob to hold the string $s_b$ while having no knowledge of the other string. Alice inputs a random string $x$ into the box and receives $r$ which she uses to one-time-pad encode her first message $e_0 := s_0 \oplus r$. The other message is encoded as $e_1 := s_1 \oplus x \oplus r$. Both $e_0$ and $e_1$ are sent to Bob. Explain how Bob can recover $e_y$ after inputting his choice bit $y$ into the upgraded box.
 
-Is this really 1-2 oblivious transfer? 
+Is this really a secure 1-2 oblivious transfer? 
 \textbf{Hint: } can we build bit commitment out of this form of 1-2 oblivious transfer? Why, or why not?
 \end{subex}
 
