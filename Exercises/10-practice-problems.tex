@@ -21,6 +21,13 @@
 \usepackage{mathrsfs} 
 \usepackage{tikz}
 \hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\newcommand{\meas}{
+\begin{tikzpicture}
+\filldraw[fill=white] (0,.25) rectangle (.7,-.25);
+\draw (.67,-.1) arc (50:130:.5);
+\draw (.35,-.2)--(.525,.2);
+\end{tikzpicture}
+}
 
 \begin{document}
 
@@ -37,10 +44,10 @@ You do not have to hand in these exercises, they are for practicing only. %Probl
 		Drawing on your intuition, do you think it will become easier or harder for dishonest Waldo and Wenda to trick Alice and Bob? Or does it not matter?
 	\end{subex}
 	\begin{subex}
-		Now explicitly compute the probability that dishonest Waldo and Wenda can cheat if Alice sends $n = 1$ qubit (encoded in either the standard or the $\pi/8$ basis with probability 1/2).
+		Now explicitly compute the probability that dishonest Waldo and Wenda (without entanglement) can cheat if Alice sends $n = 1$ qubit (encoded in either the standard or the Breidbart basis with probability 1/2).
 	\end{subex}
 	\begin{subex}
-		Suppose Waldo and Wenda have no quantum memory. What is their winning probability of Alice sends $n$ qubits?
+		Suppose Waldo and Wenda have no quantum memory. What is their winning probability if Alice sends $n$ qubits?
 	\end{subex}
 \end{exercise}
 
@@ -122,6 +129,7 @@ You do not have to hand in these exercises, they are for practicing only. %Probl
 	\end{subex}
 \end{exercise}
 
+\end{document}
 
 \begin{exercise}[Computing on encrypted quantum data]
 	Alice wants Bob to perform some quantum circuit for her. She encrypts her $n$-qubit state using a quantum one-time pad. Call the X-keys $\vec{a} = (a_1, ..., a_n)$ and the Z-keys $\vec{b} = (b_1, ..., b_n)$. She then sends the encrypted state to Bob. In this exercise, you will investigate how Bob can perform the gates $X, Z, H, P, CNOT$, and $T$ on this state in such a way that Alice can, at the end, decrypt the state to the desired outcome: the circuit applied to her input. Bob should not learn anything about Alice's input. During the computation, Alice can perform classical computations on her keys.
@@ -129,17 +137,31 @@ You do not have to hand in these exercises, they are for practicing only. %Probl
 		Bob performs the Clifford gates ($X, Z, H, P, CNOT$) by directly applying them to the encrypted qubits. Describe in detail the classical computations Alice must perform to update her keys.
 	\end{subex}
 	\begin{subex}
-		For the rest of this exercise, consider $n = 1$. Let $X^{a}Z^{b}\rho Z^{b}X^{a}$ describe the state of the qubit. Find expressions for $p, x$ and $z$ (in terms of 0, 1, $a$, and $b$) such that
+		For the rest of this exercise, consider $n = 1$. Let $X^{a}Z^{b}\rho Z^{b}X^{a}$ describe the state of the qubit. Find expressions for $x, y$ and $z$ (in terms of 0, 1, $a$, and $b$) such that
 		\[
-		TX^{a}Z^{b} = P^pX^xZ^zT.
+		TX^{a}Z^{b} = P^yX^xZ^zT.
 		\]
 	\end{subex}
 	\begin{subex}
-		$P^p$ is an error on the output state: Bob cannot continue his computation correctly without removing it first. However, Bob does not know $p$ and therefore he cannot perform $(P^p)^{\dagger}$. Should Alice tell him $p$? Why or why not?
+		$P^y$ is an error on the output state: Bob cannot continue his computation correctly without removing it first. However, Bob does not know $y$ and therefore he cannot perform $(P^y)^{\dagger}$. Should Alice tell him $y$? Why or why not?
 	\end{subex}
-	%\begin{subex}
-	%	Alice and Bob decide to try a different protocol for performing a $T$ gate. Bob does not directly apply the gate to the encrypted state, but instead, he receives an encrypted magic state $X^{a'}Z^{b'}T\ket{+}$ from Alice. He performs the following circuit on the data qubit (top wire) and the magic state (bottom wire):
-	%\end{subex}
+	\begin{subex}
+	If Alice is allowed to use quantum communication at this point, she can send Bob an encrypted magic state to help him resolve the error. What state should she send? Assume that Bob will apply the following circuit (which qubits should he apply it on, in what order?):
+	\begin{center}
+	\begin{tikzpicture}
+	\draw (0,0) -- (2,0);
+	\draw (0,1) -- (3,1);
+	\draw (1,0) circle (0.15);
+	\filldraw[fill=black] (1,1) circle(0.07);
+	\draw (1,-0.15) -- (1,1);
+
+	\draw (2,-0.05) -- (3,-0.05);
+	\draw (2,0.05) -- (3,0.05);
+		\node at (2,0) {\meas};
+	\end{tikzpicture}
+	\end{center}
+	He will send the measurement outcome back to Alice. Describe Alice's classical computation to update her keys.
+	\end{subex}
 \end{exercise}
 
 
