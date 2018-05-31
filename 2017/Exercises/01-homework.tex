@@ -1,0 +1,103 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{1}
+\newcommand\deadline{Friday June 16, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\homeworkproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Moodle no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+
+\begin{exercise}[Purity]
+The purity of a quantum state is defined as $\Tr\rho^2$. Consider a $d$-dimensional quantum state $\rho\in \mathbb{C}^{d\times d}$.
+\begin{subex}
+What is the maximal value of purity and what class of states achieves this value? Prove your answer.
+\end{subex}
+\begin{subex}
+What is the minimal value of purity, what state achieves this value? Prove your answer.
+\end{subex}
+
+\begin{subex}
+Any qubit density matrix can be represented by the Bloch vector $\vec{r}$, satisfying $|\vec{r}|\leq 1$. For any quantum state $\tau\in \mathbb{C}^{2\times 2}$ we have that $\tau= \frac{1}{2}\left( \mathbbm{1} + \vec{r}\cdot \vec{\sigma} \right)$, where $\vec{\sigma}=(\sigma_x,\sigma_y,\sigma_z)^T$ is the vector of Pauli matrices. How does the purity of $\tau$ relate to $\vec{r}$?
+\end{subex}
+
+\end{exercise}
+
+
+
+\begin{exercise}[Parity measurements (Exercise 1.5.1)]
+Use a projective measurement to measure the parity, in the Hadamard basis, of
+the state $\proj{00}$. Compute the probabilities of obtaining measurement outcomes "even" and
+"odd", and the resulting post-measurement states. What would the post-measurement states have
+been if you had first measured the qubits individually in the Hadamard basis, and then taken the
+parity?
+\end{exercise}
+
+
+
+\begin{exercise}[Robustness of GHZ and W states (Problem 6.1 of Week 1 and Problem 2 of Week 2)]
+
+Remember that $\left| W_ N \right\rangle := \frac{1}{\sqrt{N}}\sum_{i=1}^N \underset{1\text{ at the $i$-th place}}{\underbrace{\ket{0\cdots 010\cdots 0}}}$ is an equal superposition of all N-bit strings with exactly one 1 and N-1 0's and
+$\left| GHZ_ N \right\rangle :=\frac{1}{\sqrt {2}} (\left| 0 \right\rangle ^{\otimes N}+\left| 1 \right\rangle ^{\otimes N})$.
+
+In the second module you learned to distinguish product states from (pure) entangled states by calculating the Schmidt rank of $\ket{\Psi}_{AB}$, i.e. the rank of the reduced state $\rho_A=\Tr_B \ket{\Psi}\bra{\Psi}$. In particular $\ket{\Psi}$ is pure if and only if its Schmidt rank is 1. In the following, we denote by $\Tr_N$ the operation of tracing out only the last of $N$ qubits.
+
+
+\begin{subex}
+What is the overlap $\text{Tr}\Big(\left| GHZ_{N-1} \right\rangle\left\langle {GHZ_{N-1}}\right| \text {Tr}_ N\left(\left| GHZ_ N \right\rangle \left\langle GHZ_ N \right|\right)\Big)$ in the limit $N \rightarrow \infty$? 
+\end{subex}
+
+\begin{subex}
+What is the overlap $\text{Tr}\Big(\left| W_{N-1} \right\rangle \left\langle {W_{N-1}}\right| \text {Tr}_ N\left(\left| W_ N \right\rangle \left\langle W_N \right|\right)\Big)$ in the limit $N \rightarrow \infty$? 
+\end{subex}
+
+
+\begin{subex}
+What are the ranks of $\Tr_N \ket{GHZ_N}\bra{GHZ_N}$ and of $\Tr_N \ket{W_N}\bra{W_N}$, respectively? (Note that these are the Schmidt ranks of $ \ket{GHZ_N}$ and  $\ket{W_N}$ if we partition each of them between the first $N-1$ qubits and the last qubit.)
+\end{subex}
+
+\begin{subex}
+Let us now introduce a more discriminating (in fact, continuous) measure of the entanglement of a state $\ket{\Psi}_{AB}$: namely, the \emph{purity of the reduced state} $\rho_A$ given by $\Tr \rho_A^2$. 
+%First let's see how this works in practice with the extreme cases in d dimensions:
+%What are the purities $\Tr \rho^2$ for $\rho = \ket{0}\bra{0}$ and the ''maximally mixed`` state $\rho = \frac{1}{d} \mathbbm{1}$, respectively?
+%\end{subex}
+
+%\begin{subex}
+Consider again the behavior of the $N$-qubit GHZ and W states with one qubit discarded (i.e. traced out): What is the purity of $\Tr_N \ket{GHZ_N}\bra{GHZ_N}$ in the limit $N\rightarrow \infty$?
+\end{subex}
+
+\begin{subex}
+What is the purity of $\Tr_N \ket{W_N}\bra{W_N}$ in the limit $N\rightarrow \infty$?
+\end{subex}
+
+\end{exercise}
+
+\begin{exercise}[Relation between min-entropy and ignorance]
+	Let $K$ be a classical (key) register, and let $E$ be Eve's quantum register. Prove the following statement for arbitrary classical-quantum states $\rho_{KE}$: Eve is ignorant about $K$ if and only if $H_{min}(K|E) = \log|K|$.
+\end{exercise}
+
+
+
+
+
+\end{document}

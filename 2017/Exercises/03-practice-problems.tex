@@ -1,0 +1,100 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+
+\newcommand{\ket}[1]{\lvert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \rvert}
+\newcommand{\id}{\mathbb{I}}
+
+%% Settings
+\newcommand\problemset{3}
+\newcommand\deadline{Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+%\usepackage{wasysym}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+
+\begin{document}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[Min-entropy]
+What is the min-entropy of the following states?
+\begin{subex}
+$\rho_X = \ket{00}\bra{00}$
+\end{subex}
+\begin{subex}
+$\rho_X = \frac{1}{2} \ket{00}\bra{00} + \frac{1}{2} \ket{11}\bra{11}$
+\end{subex}
+\begin{subex}
+$\rho_X = \frac{3}{4} \ket{0}\bra{0} + \frac{1}{4} \ket{1}\bra{1}$
+\end{subex}
+\begin{subex}
+$\rho_X = \frac{3}{4} \ket{+}\bra{+} + \frac{1}{4} \ket{-}\bra{-}$
+\end{subex}
+\begin{subex}
+$\rho_X = \frac{1}{4} \ket{00}\bra{00} + \frac{1}{4} \ket{11}\bra{11} + \left(\frac{1}{4} - \epsilon\right) \ket{01}\bra{01} + \left(\frac{1}{4}+\epsilon\right) \ket{10}\bra{10}$
+\end{subex}
+\noindent What is the conditional min-entropy of the following states? Is Eve ignorant about the key $K$?
+\begin{subex}
+$\rho_{KE} = (\ket{00}_K \ket0_E)(\bra{00}_K\bra0_E)$
+\end{subex}
+\begin{subex}
+$\rho_{KE} = \frac{1}{2}(\ket{00}_K \ket0_E)(\bra{00}_K\bra0_E) + \frac{1}{2}(\ket{11}_K \ket0_E)(\bra{11}_K\bra0_E)$
+\end{subex}
+\begin{subex}
+$\rho_{KE} = \frac{3}{4} (\ket{0}_K\ket0_E)(\bra{0}_K\bra0_E) + \frac{1}{4} (\ket{1}_K\ket{\circlearrowright}_E)(\bra{1}_K\bra\circlearrowright_E)$, where $\ket{\circlearrowright} = \frac{1}{\sqrt{2}}(\ket0 + i \ket1)$.
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[Winning probability in the bipartite guessing game]
+Recall the bipartite guessing game: Eve prepares a state $\rho_{AE}$, and sends the $A$ register to Alice. Alice chooses a random basis $\theta \in \{0,1\}$, and measures $\rho_A$ in the computational basis if $\theta = 0$ or in the Hadamard basis if $\theta = 1$. She records the outcome $X$. Eve has to guess $X$, based on her state $\rho_E$ and on $\theta$. She wins if she guesses correctly.
+
+\begin{subex}
+If $E$ is has zero dimension (that is, Eve is not allowed to hold back any information), what is the maximum winning probability for Eve? What state $\rho_A$ should she prepare?
+\end{subex}
+
+\begin{subex}
+If $E$ is has higher dimension (that is, Eve is allowed to keep an entangled state), what is the maximum winning probability for Eve? What state $\rho_{AE}$ should she prepare?
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[Trace distance]
+	Let $\ket{\Phi} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$ denote the EPR state. Alice and Bob try to create a shared EPR pair: $\rho_{\mathsf{ideal}} = \ket{\Phi}\bra{\Phi}$. Sadly, they are not very good at this yet and instead they create the shared state $\rho_{\mathsf{real}} = (1-p)\ket{\Phi}\bra{\Phi} + p \frac{\id}{4}$. What is the trace distance between $\rho_{\mathsf{ideal}}$ and $\rho_{\mathsf{real}}$?
+\end{exercise}
+
+
+\begin{exercise}[Guessing with three bases]
+	Eve prepares a single-qubit state $\ket{\psi}$ and sends it to Alice. Alice then generates a random number $\theta \in \{0,1,2\}$. If $\theta = 0$ she measures in the standard basis (Z-basis), if $\theta = 1$ she measures in the Hadamard basis (X-basis), and if $\theta = 2$ she measures in the rotation basis (Y-basis). Alice announces $\theta$ to Eve, but not her measurement outcome $x$. Eve's goal is now to guess $x$.
+	\begin{subex}
+		What is Eve's winning probability if $\ket{\psi} = \ket0$? What about $\ket{\psi} = \ket{+}$?
+	\end{subex}
+	\begin{subex}
+		In the guessing game with two bases, the state that gives Eve the optimal winning probability is $\ket{\psi} = \frac{1}{\sqrt{2 + \sqrt{2}}} (\ket0 + \ket{+})$. What is Eve's winning probability when using this state?
+	\end{subex}
+\begin{subex}
+	What do you think the optimal $\ket{\psi}$ looks like for the three-bases guessing game? Is Eve's winning probability lower, equal, or higher than the optimal winning probability in the two-bases game?
+\end{subex}
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

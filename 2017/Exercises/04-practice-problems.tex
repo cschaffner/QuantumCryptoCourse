@@ -1,0 +1,99 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+
+\newcommand{\ket}[1]{\lvert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \rvert}
+\newcommand{\id}{\mathbb{I}}
+
+%% Settings
+\newcommand\problemset{4}
+\newcommand\deadline{Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+%\usepackage{wasysym}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{mathrsfs} 
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+
+\begin{document}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[A pretty good measurement]
+You are given one of three states $\rho_0 = \ket0\bra0$, $\rho_1 = \frac{1}{2}\id$, and $\rho_2 = \ket1\bra1$, each with equal probability.
+\begin{subex}
+	What is the probability of correctly identifying which state you were given (1, 2 or 3) if you use the pretty-good-measurement?
+\end{subex}
+\begin{subex}
+	Can you find a measurement that will give you a better success probability?
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[Negligible functions]
+	A function $f: \mathbb{N} \to \mathbb{R}$ is called negligible if for any $c \in \mathbb{N}_+$, there exists an integer $n_c$ such that for all $n > n_c$ we have
+	\[
+	|f(n)| < \frac{1}{n^c}.
+	\]
+	\begin{subex}
+		Show that $f(n) = 2^{-(\log(n))^2}$ is negligible.
+	\end{subex}
+	\begin{subex}
+		Show that if $f(n)$ and $g(n)$ are negligible, then so is $h(n) = f(n) + g(n)$.
+	\end{subex}
+	\begin{subex}
+		Similarly, show that if $f(n)$ is negligible, and $g(n) = O(n^d)$ for some $d \in \mathbb{N}$, then so is $h(n) = f(n) \cdot g(n)$. Can you see why negligible functions are useful to bound the success probability of an adversary?
+	\end{subex}
+	
+\end{exercise}
+
+\begin{exercise}[2-universality]
+Let $\mathscr{F} = \{f_y : \{0,1\}^n \to \{0,1\}^m\}$ be a 2-universal family of hash functions. For some $m' < m$, define $\mathscr{F}' = \{f'_y : \{0,1\}^n \to \{0,1\}^{m'}\}$ by $f_y'(x) = f_y(x)_{|m'}$, that is, the first $m'$ bits of $f_y(x)$. Show that $\mathscr{F}'$ is also 2-universal.
+\end{exercise}
+
+\begin{exercise}[A weak seeded extractor]
+	For any $y \in \{0,1\}^n$, define $f_y : \{0,1\}^n \to \{0,1\}^n$ by $f_y(x) = x \oplus y$. Here, $\oplus$ represents the bitwise parity (e.g., $11 \oplus 01 = 10$).
+	\begin{subex}
+		Show that the family $\mathscr{F} = \{f_y\}$ is 1-universal.
+	\end{subex}
+    \begin{subex}
+    	How could you use $\mathscr{F}$ to build a $(k,0)$-weak seeded randomness extractor $\text{Ext} : \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$ for any $k$. Is this extractor useful?
+    \end{subex}
+    \begin{subex}
+    	Alice and Bob are impressed by the parameter $\epsilon = 0$ in the previous exercise. They decide that if $\mathscr{F}$ can be used for a $(k,0)$-weak seeded randomness extractor, then certainly it can reasonably be used as a \textbf{strong} seeded randomness extractor as well. They define $\text{Ext}(x,y) = f_y(x)$. Do you think this is a good idea? How does Eve's guessing probability change after extraction?
+    \end{subex}
+\end{exercise}
+
+\begin{exercise}[Deterministic extractors on bit-fixing sources]
+	In the lectures, you learned that no deterministic function can serve as an extractor for \emph{all} random sources of a given length. This doesn't rule out the possibility that a deterministic extractor can work on some restricted class of sources. Consider Alice holding an $n$-bit source $X$ that fixes $t < n$ bits. These $t$ bits represent the bits that Eve learns about $X$, and that are therefore not usable by Alice anymore for her cryptographic tasks.
+	\begin{subex}
+		If Alice knows which $t$ positions are fixed by $X$, how much randomness can she extract from $X$?
+	\end{subex}
+	\begin{subex}
+		Now suppose Alice does not know which bits are compromised (but she does know $t$). She decides to extract randomness from $X$ by taking the XOR of all of her bits, producing just one output bit. For which values of $t$ is this secure?
+	\end{subex}
+    \begin{subex}
+   	    Alice now wants to extract more than one bit of randomness from $X$ (still without knowing which positions are fixed). Her idea is to take subsets of the bits of $X$, and to treat each subset as its own bit-fixing source. What is the largest number of independent subsources she can take (in terms of $n$ and $t$), such that it is possible to securely extract a bit of randomness from each subsource?
+   	\end{subex}
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
