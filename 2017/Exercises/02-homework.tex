@@ -1,0 +1,128 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{2}
+\newcommand\deadline{Friday June 23, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\usepackage{mathrsfs} 
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\newcommand{\Hmin}{\mathrm{H}_{\mathrm{min}}}
+
+\homeworkproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Moodle no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+\begin{exercise}[Injective functions are collapsing]
+Show that an injective function is collapsing, i.e. give a proof of Lemma~2 of \href{http://homepages.cwi.nl/~schaffne/spool/sponges.pdf}{our recent paper}. You can ignore the oracles $\mathcal{O}$ in the statement of Lemma 2 and in Definition~1.
+\end{exercise}
+
+
+\begin{exercise}[A weak seeded extractor]
+	For any $y \in \{0,1\}^n$, define $f_y : \{0,1\}^n \to \{0,1\}^n$ by $f_y(x) = x \oplus y$. Here, $\oplus$ represents the bitwise parity (e.g., $11 \oplus 01 = 10$).
+	\begin{subex}
+		Show that the family $\mathscr{F} = \{f_y\}$ is 1-universal.
+	\end{subex}
+    \begin{subex}
+        Show that the family $\mathscr{F} = \{f_y\}$ is not 2-universal.
+    \end{subex}
+    \begin{subex}
+    	How could you use $\mathscr{F}$ to build a $(k,0)$-weak seeded randomness extractor $\text{Ext} : \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$, for any $0 \leq k \leq n$? Is this extractor useful?
+    \end{subex}
+    \begin{subex}
+    	Alice and Bob have a $k$-source $X$ for some $k < n$. They are impressed by the parameters in the previous subexercise, and decide to use $\mathscr{F}$ to build a strong seeded randomness extractor as well. They know they should not expect to securely extract more than $k$ bits of key, so they define $\text{Ext}(x,y) := (x_1 \oplus y_1, ..., x_k \oplus y_k)$, that is, the first $k$ bits of $f_y(x)$. (From the exercise session, they know how to show that this set of functions is still 1-universal). Do you think this is a good idea? Give a lower bound to Eve's probability of guessing the key.
+    \end{subex}
+\end{exercise}
+
+\begin{exercise}[Min-Entropy Chain rule for cq-states]
+Let $\rho_{XE} = \sum_x P_X(x) \ket{x}\bra{x} \otimes \rho_E^x$ be a cq-state. Prove the following chain rule:
+\[
+\Hmin(X | E) \geq \Hmin(X) - \log |E| \, .
+\]
+\textbf{Hint: } Use the fact that $0 \leq \rho_E^x \leq \mathbbm{1}$.
+
+\end{exercise}
+
+\begin{exercise}[Min-entropy from the matching outcomes bound]
+Alice and Bob can extract at most $H_{\text{min}}(X|E)$ bits of randomness to create their key, $X$ is the outcome of Alice's measurement on her qubit. Now we want to connect the conditional min-entropy to the probability that the matching-outcomes test succeeds. We assume that the adversary Eve prepares $n$ identical and uncorrelated copies of the tripartite state $|\psi _{ABE}\rangle$ and sends the qubits $A$ to Alice and $B$ to Bob.
+Recall that if Alice measures her qubit in the standard basis, and the resulting post-measurement state on her qubit and Eve's system $E$ is a classical-quantum (cq) state
+\begin{equation}
+\rho _{XE} = \frac{1}{2}|0\rangle \langle 0| \otimes \rho _ E^{Z,0}+\frac{1}{2}|1\rangle \langle 1| \otimes \rho _ E^{Z,1},
+\end{equation}
+then the optimal guessing probability $P_{\text{guess}}(X|E)$ such that
+\begin{equation}
+H_{\min}(X|E) = - \log P_{\text{guess}}(X|E)
+\end{equation}
+is given by the Helstr\"om measurement, for which
+\begin{equation}
+P_{\text{guess}}(X|E) = \frac{1}{2}+\frac{1}{4}\| \rho _ E^{Z,0}-\rho _ E^{Z,1}\| _1.\label{eq:helbnd}
+\end{equation}
+The same reasoning holds for any other choice of Alice's basis, notably the Hadamard basis $\{ |+\rangle ,|-\rangle \}$. In the BB'84 protocol Alice chooses with probability $1/2$ one of the two bases in which to measure her qubit. If we denote by $P_{\text{guess}}(X|E,\Theta =0)$ and $P_{\text{guess}}(X|E,\Theta =1)$ the optimal guessing probabilities for Alice measuring in the standard ($\Theta =0$) and Hadamard ($\Theta =1$) bases respectively, the desired lower bound is given by
+\begin{equation}
+H_{\min}(X|E ) = -\log \left[\frac{1}{2}P_{\text{guess}}(X|E,\Theta =0)+\frac{1}{2}P_{\text{guess}}(X|E,\Theta =1)\right]. \label{eq:hminpgues}
+\end{equation}
+
+
+
+\begin{subex}[Problem 1]
+Suppose Alice and Bob share a pure Bell pair $|\Phi ^+\rangle$, uncorrelated with Eve's system: $\rho _{ABE} = |\Phi ^+\rangle \langle \Phi ^+|_{AB} \otimes \rho _ E$. What is $H_{\min}(X|E)$? 
+\end{subex}
+\begin{subex}[Problem 2]
+ Now consider the general case, where $|\psi _{ABE}\rangle$ is an arbitrary state prepared by Eve. Let $p$ be the probability that this state succeeds in the matching outcomes test, when Alice and Bob both measure in the same basis $\Theta$ chosen at random. Give coefficients $a,b,c$ such that
+\begin{equation}
+p = a \langle \psi _{ABE}| X_ A \otimes X_ B \otimes \mathbbm{1}_ E |\psi _{ABE}\rangle + b\langle \psi _{ABE}| Z_ A \otimes Z_ B \otimes \mathbbm{1}_ E |\psi _{ABE}\rangle + c,
+\end{equation}
+where $X$,$Z$ are the Pauli observables $X = |+\rangle \langle +| - |-\rangle \langle -|$ and $Z = |0\rangle \langle 0| - |1\rangle \langle 1|$. 
+\end{subex}
+\begin{subex}[Problem 3]
+ Let $p_ X$ (resp. $p_ Z$) be the probability that the state $|\psi _{ABE}\rangle$ passes the matching outcomes test in the Hadamard (resp. computational) basis, so that $p=\frac{1}{2}(p_ X+p_ Z)$.
+
+By expanding the qubit $A$ in the computational basis, the state $|\psi _{ABE}\rangle$ can be expressed as $|\psi _{ABE}\rangle = |0\rangle _ A\otimes |u_0)_{BE} + |1\rangle _ A\otimes |u_1) _{BE}$ ($|u)_{BE}$ signifies a not normalized vector in $\mathcal{H}_{BE}$), with $\| |u_0) _{BE}\|^2+\| |u_1)_{BE}\|^2=1$. Give coefficients $a'$,$b'$ such that
+\begin{equation}
+\langle \psi _{ABE}| X_ A \otimes X_ B \otimes \mathbbm{1}_ E |\psi _{ABE}\rangle = a'\, \mathfrak{Re} (( u_0| X_ B \otimes \mathbbm{1}_ E |u_1) ) + b'.
+\end{equation}
+
+\end{subex}
+
+\begin{subex}[Problem 4]
+ Suppose Alice measures her qubit in the computational basis: the post-measurement state on $A$ and $E$ (tracing out $B$) can be written as $\rho _{AE}^ Z = |0\rangle \langle 0|_ A\otimes \sigma _ E^{Z,0} + |1\rangle \langle 1|_ A\otimes \sigma _ E^{Z,1}$. Similarly, if Alice measures in the Hadamard basis we may write the post-measurement state as $\rho _{AE}^ X = |+\rangle \langle +|_ A\otimes \sigma _ E^{X,+} + |-\rangle \langle -|_ A\otimes \sigma _ E^{X,-}$.
+
+Use the previous two questions to determine coefficients $\alpha$ ,$\beta$ such that
+\begin{equation}
+2p-1 \leq \alpha F(\sigma _ E^{X,+},\sigma _ E^{X,-}) + \beta F(\sigma _ E^{Z,0},\sigma _ E^{Z,1}).
+\end{equation}
+
+
+where $F$ denotes the fidelity.
+
+[Hint: observe that $|u_0\rangle _{BE}$ and $|u_1\rangle _{BE}$ considered in the previous question are purifications of $\sigma _ E^{Z,0}$ and $\sigma _ E^{Z,1}$ respectively, and use Uhlmann's theorem] 
+\end{subex}
+
+\begin{subex}[Problem 5]
+Recall the inequality $D(\rho ,\sigma ) \leq \sqrt {1-F(\rho ,\sigma )^2}$. Using also the definition of $H_{\min} (X|E)$ (Equations \eqref{eq:helbnd}, \eqref{eq:hminpgues}), show that the best lower bound on $H_{\min}(X|E)$, as a function of $p$, that you can get is 
+\begin{equation}
+1-\log \left(1+\sqrt {p(1-p)+\frac34}\right).
+\end{equation}
+\end{subex}
+
+
+\end{exercise}
+
+
+\end{document}
