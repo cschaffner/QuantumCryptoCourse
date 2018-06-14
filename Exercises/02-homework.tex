@@ -34,19 +34,20 @@ Show that an injective function is collapsing, i.e. give a proof of Lemma~4 of \
 \end{exercise}
 
 
-\begin{exercise}[A weak seeded extractor]
-	For any $y \in \{0,1\}^n$, define $f_y : \{0,1\}^n \to \{0,1\}^n$ by $f_y(x) = x \oplus y$. Here, $\oplus$ represents the bitwise parity (e.g., $11 \oplus 01 = 10$).
+\begin{exercise}[XOR-universal hash functions]
+A family $\mathscr{F} = \{f_y : \{0,1\}^n \mapsto \{0,1\}^m\}$ is \emph{XOR universal} if for all $x \neq x'$ and all $z$,
+\[
+P_y[f_y(x) \oplus f_y(x') = z] = \frac{1}{2^m}.
+\]
+	In words, the XOR of any pair of function values is uniformly distributed over the output space.
 	\begin{subex}
-		Show that the family $\mathscr{F} = \{f_y\}$ is 1-universal.
+		Show that if a function family $\mathscr{F}$ is 2-universal, then it is XOR-universal.
 	\end{subex}
     \begin{subex}
-        Show that the family $\mathscr{F} = \{f_y\}$ is not 2-universal.
+        Show that the converse of the previous subexercise does not hold by showing that there exists a function that is XOR-universal, but not 2-universal. (\textbf{Hint:} start with an arbitrary 2-universal function and alter it slightly, so that it is not 2-universal anymore.)
     \end{subex}
     \begin{subex}
-    	How could you use $\mathscr{F}$ to build a $(k,0)$-weak seeded randomness extractor $\text{Ext} : \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$, for any $0 \leq k \leq n$? Is this extractor useful?
-    \end{subex}
-    \begin{subex}
-    	Alice and Bob have a $k$-source $X$ for some $k < n$. They are impressed by the parameters in the previous subexercise, and decide to use $\mathscr{F}$ to build a strong seeded randomness extractor as well. They know they should not expect to securely extract more than $k$ bits of key, so they define $\text{Ext}(x,y) := (x_1 \oplus y_1, ..., x_k \oplus y_k)$, that is, the first $k$ bits of $f_y(x)$. (From the exercise session, they know how to show that this set of functions is still 1-universal). Do you think this is a good idea? Give a lower bound to Eve's probability of guessing the key.
+    	In the lecture notes, it is shown that a 2-universal function family $\mathscr{F}$ can be used to construct a strong seeded randomness extractor (see Theorem 4.3.1; the leftover hash lemma). Is the proof (for the case with no side information) still valid if a XOR-universal function family is used to build the extractor?
     \end{subex}
 \end{exercise}
 
@@ -65,8 +66,8 @@ in QKD. A again sends randomly one of four states used in BB84, and B measures r
 probability $1/2$ B measures in the computational basis and he gets $\ket{1}$. He is not sure, however which state from the announced pair caused this results so he discard it. With probability $1/2$ he measures in the Hadamard basis in which case half of the times he gets $\ket{+}$ and half of the time he gets $\ket{-}$. Only in this last case he is sure that the state send by A was $\ket{1}$ and he writes down the bit value 0. What portion of the bits is discarded. Analyze the security of the protocol under random basis attacks. If the pairs of states had been announced before sending the qubit, could E perform a more powerful intercept and resend attack?
 \end{exercise}
 
-\begin{exercise}[Intermediate basis attack]
-Analyse the intercept and resend attack in BB48 protocol in which Eve measurems in the basis intermediate between the computational and Hadamard bases.
+\begin{exercise}[Intermediate-basis attack]
+Analyse the intercept-and-resend attack on the BB48 protocol in which Eve measures in the basis intermediate between the computational and Hadamard bases.
 \end{exercise}
 
 
