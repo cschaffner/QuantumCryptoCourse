@@ -29,13 +29,10 @@
 %This week's exercises deal with sets, counting and uniform probabilities.
 Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Canvas no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
 }
-\begin{exercise}[Injective functions are collapsing]
-Show that an injective function is collapsing, i.e. give a proof of Lemma~4 of \href{https://eprint.iacr.org/2017/771.pdf}{our recent paper}. You can ignore the oracles $\mathcal{O}$ in the statement of Lemma~4 and in Definition~3.
-\end{exercise}
 
 
 \begin{exercise}[XOR-universal hash functions]
-A family $\mathscr{F} = \{f_y : \{0,1\}^n \mapsto \{0,1\}^m\}$ is \emph{XOR universal} if for all $x \neq x'$ and all $z$,
+A family $\mathscr{F} = \{f_y : \{0,1\}^n \mapsto \{0,1\}^m\}$ is \emph{XOR-universal} if for all $x \neq x'$ and all $z$,
 \[
 P_y[f_y(x) \oplus f_y(x') = z] = \frac{1}{2^m}.
 \]
@@ -60,16 +57,18 @@ Let $\rho_{XE} = \sum_x P_X(x) \ket{x}\bra{x} \otimes \rho_E^x$ be a cq-state. P
 
 \end{exercise}
 
-\begin{exercise}[SARG04 Quantum Key Distribution Protocol]
-A protocol propose in 2004 is a seemingly innocent variation to BB84 protocol, but has some advantages in realistic implementation
-in QKD. A again sends randomly one of four states used in BB84, and B measures randomly in either horizontal-vertical or diagonal basis. However, instead of revealing the basis at the sifting stage, A announces publicly one of four pairs $\{ \ket{0},\ket{+} \}$, $\{ \ket{0},\ket{-} \}$, $\{ \ket{1},\ket{+} \}$, $\{ \ket{1},\ket{-} \}$. The announced pair contains a state send by A but it is not revealed which one. The convention is that $\ket{+}$, $\ket{-}$ are assigned logical value 0 while $\ket{0}$, $\ket{1}$ logical value 1. To understand how secret key can be generated consider situation in which A sends $\ket{1}$ and announces the pair $\{ \ket{1},\ket{+} \}$, with
-probability $1/2$ B measures in the computational basis and he gets $\ket{1}$. He is not sure, however which state from the announced pair caused this results so he discard it. With probability $1/2$ he measures in the Hadamard basis in which case half of the times he gets $\ket{+}$ and half of the time he gets $\ket{-}$. Only in this last case he is sure that the state send by A was $\ket{1}$ and he writes down the bit value 0. What portion of the bits is discarded. Analyze the security of the protocol under random basis attacks. If the pairs of states had been announced before sending the qubit, could E perform a more powerful intercept and resend attack?
-\end{exercise}
-
 \begin{exercise}[Intermediate-basis attack]
-Analyse the intercept-and-resend attack on the BB48 protocol in which Eve measures in the basis intermediate between the computational and Hadamard bases.
+Analyze the intercept-and-resend attack on BB84 protocol in which Eve measures in the basis intermediate between the computational and Hadamard bases, i.e. $\{\ket{\frac{\pi}{4}},\ket{\frac{5\pi}{4}} \}$, where $\ket{\frac{\pi}{4}}:=\cos(\pi/8)\ket{0}+\sin(\pi/8)\ket{1}$, and $\ket{\frac{5\pi}{4}}:=-\sin(\pi/8)\ket{0}+\cos(\pi/8)\ket{1}$. What is the error rate this attack induces?
+\end{exercise}
+
+\begin{exercise}[SARG04 Quantum Key Distribution Protocol (Exercise 4.3.4 from \href{https://www.fuw.edu.pl/~demko/Teksty/ik05/2012/qi12.pdf}{the lecture notes to Quantum Information 1/2})]
+A protocol proposed in 2004 is a seemingly innocent variation to BB84 protocol, but has some advantages in realistic implementation of QKD. Alice again sends randomly one of four states used in BB84, and Bob measures randomly in either computational or Hadamard basis. However, instead of revealing the basis, Alice announces publicly one of four pairs $\{ \ket{0},\ket{+} \}$, $\{ \ket{0},\ket{-} \}$, $\{ \ket{1},\ket{+} \}$, $\{ \ket{1},\ket{-} \}$. The announced pair contains the state send by Alice but it is not revealed which one. The convention is that $\ket{+}$, $\ket{-}$ are assigned logical value 0 while $\ket{0}$, $\ket{1}$ logical value 1. To understand how secret key can be generated consider situation in which Alice sends $\ket{1}$ and announces the pair $\{ \ket{1},\ket{+} \}$, with probability $1/2$ Bob measures in the computational basis and he gets $\ket{1}$. He is not sure, however, which state from the announced pair caused this result so he discards it. With probability $1/2$ he measures in the Hadamard basis in which case half of the time he gets $\ket{+}$ and half of the time he gets $\ket{-}$. Only in the latter case he is sure that the state send by A was $\ket{1}$ and he writes down the bit value 1. What portion of the bits is discarded. Analyze the security of the protocol under random basis intercept-and-resend attack. If the pairs of states had been announced before sending the qubit, could Eve perform a more powerful intercept-and-resend attack? In realistic implementations of QKD we want to send single photons in polarization states, production of single photons is rather hard though. One dangerous thing that might happen is that Alice, instead of one, sends two photons in the same state, giving Eve a copy of the sent state. Explain how does using SARG04 help with this issue.
 \end{exercise}
 
 
+
+\begin{exercise}[Injective functions are collapsing]
+Show that an injective function is collapsing, i.e. give a proof of Lemma~4 of \href{https://eprint.iacr.org/2017/771.pdf}{our recent paper}. You can ignore the oracles $\mathcal{O}$ in the statement of Lemma~4 and in Definition~3.
+\end{exercise}
 
 \end{document}
