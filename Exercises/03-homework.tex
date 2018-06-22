@@ -7,7 +7,7 @@
 
 %% Settings
 \newcommand\problemset{3}
-\newcommand\deadline{Saturday July 1, 20:00h}
+\newcommand\deadline{Friday 29 June, 20:00h}
 \newif\ifcomments
 \commentsfalse % hide comments
 %\commentstrue % show comments
@@ -40,18 +40,18 @@
 Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Canvas no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
 }
 
-\begin{exercise}[A coherent attack on a non-local game]
+\begin{exercise}[Parallel repetition of non-local games]
 	Consider the following cooperative game $G$. Alice receives an input bit $s$, and Bob an input bit $t$. They are promised that $(s,t) \in_R \{(0,0),(0,1),(1,0)\}$. They generate output bits $a,b \in \{0,1\}$ respectively, and win if $a \vee s \neq b \vee t$.
 	\begin{subex}
-		Analyze the winning probability for the trivial strategy $a = s$ and $b = t$. Can any classical strategy do better?
+		Analyze the winning probability $p_{\mathsf{win}}$ for the trivial strategy $a = s$ and $b = t$. Can any classical strategy do better?
 	\end{subex}
     \begin{subex}
-    	In the two-parallel version $G^{(2)}$ of this game, Alice and Bob receive \emph{two} pairs $(s_0, t_0)$ and $(s_1, t_1)$, selected independently and uniformly at random from $\{(0,0),(0,1),(1,0)\}$. (Alice gets $(s_0, s_1)$, Bob gets $(t_0, t_1)$.) They win if their responses $(a_0, a_1)$ and $(b_0, b_1)$ are such that $a_i \vee s_i \neq b_i \vee t_i$ for all $i \in \{0,1\}$.
+    	In the two-parallel version $G^{(2)}$ of this game, Alice and Bob receive \emph{two} pairs $(s_0, t_0)$ and $(s_1, t_1)$, selected independently and uniformly at random from $\{(0,0),(0,1),(1,0)\}$. (Alice gets $(s_0, s_1)$, Bob gets $(t_0, t_1)$.) They win if their responses $(a_0, a_1)$ and $(b_0, b_1)$ are such that $a_i \vee s_i \neq b_i \vee t_i$ for all $i \in \{0,1\}$. Of course, Alice and Bob can win with probability $p_{\mathsf{win}}^2$ if they simply repeat the strategy from part (a) twice. But maybe they can do better?
     	\\
     	Describe a classical strategy for $G^{(2)}$ with a winning probability of at least $\frac{2}{3}$.
     \end{subex}
     \begin{subex}
-    	Suppose Alice and Bob have a valid classical strategy for $G^{(2)}$ which wins with probability $\omega_c$. Describe a classical strategy for $G$ guaranteeing the same winning probability $\omega_c$. (Recall that Alice and Bob may have shared randomness, but they may not communicate.)
+    	Suppose Alice and Bob have a valid classical strategy for $G^{(2)}$ which wins with probability $q$. Describe a classical strategy for $G$ guaranteeing the same winning probability $q$. (Recall that Alice and Bob may have shared randomness, but they may not communicate.)
     \end{subex}
     \begin{subex}
     Is the strategy you found in (b) optimal?
