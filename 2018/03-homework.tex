@@ -1,0 +1,142 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{3}
+\newcommand\deadline{Friday 29 June, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\usepackage{mathrsfs} 
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\usepackage{tikz}
+\newcommand{\meas}{
+\begin{tikzpicture}
+\filldraw[fill=white] (0,.25) rectangle (.7,-.25);
+\draw (.67,-.1) arc (50:130:.5);
+\draw (.35,-.2)--(.525,.2);
+\end{tikzpicture}
+}
+\newcommand{\Hi}{\mathcal{H}}
+
+\begin{document}
+
+\newcommand{\Hmin}{\mathrm{H}_{\mathrm{min}}}
+
+\homeworkproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Canvas no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[Parallel repetition of non-local games]
+	Consider the following cooperative game $G$. Alice receives an input bit $s$, and Bob an input bit $t$. They are promised that $(s,t) \in_R \{(0,0),(0,1),(1,0)\}$. They generate output bits $a,b \in \{0,1\}$ respectively, and win if $a \vee s \neq b \vee t$.
+	\begin{subex}
+		Analyze the winning probability $p_{\mathsf{win}}$ for the trivial strategy $a = s$ and $b = t$. Can any classical strategy do better?
+	\end{subex}
+    \begin{subex}
+    	In the two-parallel version $G^{(2)}$ of this game, Alice and Bob receive \emph{two} pairs $(s_0, t_0)$ and $(s_1, t_1)$, selected independently and uniformly at random from $\{(0,0),(0,1),(1,0)\}$. (Alice gets $(s_0, s_1)$, Bob gets $(t_0, t_1)$.) They win if their responses $(a_0, a_1)$ and $(b_0, b_1)$ are such that $a_i \vee s_i \neq b_i \vee t_i$ for all $i \in \{0,1\}$. Of course, Alice and Bob can win with probability $p_{\mathsf{win}}^2$ if they simply repeat the strategy from part (a) twice. But maybe they can do better?
+    	\\
+    	Describe a classical strategy for $G^{(2)}$ with a winning probability of at least $\frac{2}{3}$.
+    \end{subex}
+    \begin{subex}
+    	Suppose Alice and Bob have a valid classical strategy for $G^{(2)}$ which wins with probability $q$. Describe a classical strategy for $G$ guaranteeing the same winning probability $q$. (Recall that Alice and Bob may have shared randomness, but they may not communicate.)
+    \end{subex}
+    \begin{subex}
+    Is the strategy you found in (b) optimal?
+    \end{subex}
+\end{exercise}
+
+\begin{exercise}[A Simple Quantum Bit Commitment Protocol, Continued]
+Recall the bit commitment protocol we discussed in the exercise session. In the \emph{commit phase}, Alice commits to bit $b$ by preparing the state 
+$\ket{\psi_b}= \sqrt{\alpha} \ket{bb} + \sqrt{1-\alpha} \ket{22}$, and sending the second qutrit to Bob. In the \emph{open phase}, she reveals the classical bit $b$ and sends the first qutrit over to Bob, who checks that the pure state is the correct one, by making a measurement with respect to any orthogonal basis containing $\ket{\psi_b}$.
+
+In class, we computed Bob's cheating probability, \[P_B^*= \Pr[\text{Bob guesses $b$ after the commit phase}],\] to be $\frac{1}{2} + \frac{\alpha}{2}$. Next, let's calculate Alice's cheating probability $P_A^*$, given by
+\[\frac12(\Pr[\text{Alice opens $b=0$ successfully}]+ \Pr[\text{Alice opens $b=1$ successfully}])\]
+
+\begin{subex}
+Let the underlying Hilbert space be $\Hi \otimes \Hi_s \otimes \Hi_t$, where $\Hi_t$ corresponds to the qutrit that is sent to Bob in the commit phase, $\Hi_s$ to the qutrit that is sent during the opening phase, and $\Hi$ is any auxiliary system that Alice might use. For the most general strategy, we can assume that she prepares the pure state $\ket{\phi}$, as it can always be purified on $\Hi$.
+
+We can write $\ket{\phi} = \sum_i \sqrt{p_i} \ket{i} \ket{\tilde{\psi}_{i,b}}$ where $\{\ket{i}\}$ and $\{ \ket{\tilde{\psi}_{i,b}} \}$ are Schmidt bases of $\Hi$ and $\Hi_s \otimes \Hi_t$ respectively. Note that depending on the bit $b$ Alice tries to open, she can use a different Schmidt basis of $\Hi_s \otimes \Hi_t$. Hence, the reduced density matrix on $\Hi_s \otimes \Hi_t$ is $\sigma^b_{s,t} = \sum_i p_i \ket{\tilde{\psi}_{i,b}}\bra{\tilde{\psi}_{i,b}}$. However, the part in $\Hi_t$ which is sent to Bob in the commitment phase does not depend on $b$ and we use $\sigma_t$ to denote Bob's reduced density matrix after the commit phase, i.e. just a qutrit.
+Now, compute the probability of dishonest Alice successfully opening bit $b$ in terms of the squared fidelity between the states $\ket{\psi_b}$ and $\sigma^b_{s,t}$.
+\end{subex}
+
+\begin{subex}
+Then give the following upper bound on Alice's cheating probability:
+\[
+P_A^* \leq \frac12 \left( F^2(\sigma_t, \rho_0) + F^2(\sigma_t,\rho_1) \right)
+\]
+
+\textbf{Hint: } use the fact that the fidelity is non-decreasing under taking partial trace, in particular tracing out system $\Hi_s$.
+
+\end{subex}
+
+\begin{subex}
+Remember the property of fidelity that for any three density matrices $\rho_1, \rho_2, \rho_3$, it holds that $F^2(\rho_1, \rho_2) + F^2(\rho_1, \rho_3) \leq 1 + F(\rho_2, \rho_3)$. Give an upper bound to Alice's cheating probability in terms of $\alpha$.
+\end{subex}
+
+\begin{subex}
+The bound on Alice's cheating probability that we just obtained is tight. There is a simple cheating strategy that allows Alice to achieve this bound, without even making use of the auxiliary system $\Hi$. What state(s) of two qutrits can she prepare?
+\end{subex}
+
+\begin{subex}
+Finally, by combining the calculations so far on Alice and Bob's cheating probabilities, determine the $\alpha$ that minimizes the overall cheating probability of the protocol. What is the overall cheating probability?
+\end{subex}
+
+\end{exercise}
+
+\begin{exercise}[Quantum computing on encrypted data]
+	Alice wants Bob to perform some quantum circuit for her. She encrypts her $n$-qubit state $\ket\psi$ using a quantum one-time pad. Call the X-keys to the quantum one-time pad $\vec{a} = (a_1, ..., a_n)$, and the Z-keys $\vec{b} = (b_1, ..., b_n)$. She then sends the encrypted state to Bob. In this exercise, you will investigate how Bob can perform a quantum circuit $C$, consisting of gates $G_1, ..., G_k$, on this state such that the following holds:
+\begin{description}
+\item[(Correctness)] If Bob follows the protocols for the gates $G_1, ..., G_k$ in the correct order, then the resulting state can be decrypted to $C\ket\psi$ by Alice, who can only do Pauli operations and classical computation.
+\item[(Security)] If Bob does not know the keys $\vec{a}$ and $\vec{b}$, he does not learn anything about Alice's input state $\ket\psi$.
+\end{description}
+	\begin{subex}
+		Bob performs the Clifford gates (e.g., $X, Z, H, P, CNOT$) by directly applying them to the encrypted qubits. Alice uses her classical computation power to update her key vectors $\vec{a}$ and $\vec{b}$ after each gate application. Describe in detail the classical computations Alice must perform to update her keys after Bob applies (i) a phase gate $P$ and (ii) a $CNOT$ gate.
+	\end{subex}
+	\begin{subex}
+		 Find expressions for $x, y$ and $z$ (in terms of 0, 1, $a$, and $b$) such that
+		\[
+		TX^{a}Z^{b} = P^yX^xZ^zT.
+		\]
+	\end{subex}
+	\begin{subex}
+		For the rest of this exercise, consider $n = 1$. Let $X^{a}Z^{b}\ket\psi$ describe the state of Alice's encrypted input qubit. After Bob applies a $T$ gate, $P^y$ is an error on the output state: Bob cannot continue his computation correctly without removing it first. However, Bob does not know $y$ and therefore he cannot perform $(P^y)^{\dagger}$. Should Alice tell him $y$? Why or why not?
+	\end{subex}
+	\begin{subex}
+	If Alice is allowed to use quantum communication at this point, she can send Bob an encrypted magic state to help him resolve the error $P^y$. What state $\ket\varphi$ should she send? Assume that Bob will apply the following circuit:
+	\begin{center}
+	\begin{tikzpicture}
+	\node[anchor=east] at (0,1) {$TX^aZ^b\ket\psi$};
+	\node[anchor=east] at (0,0) {$\ket\varphi$};
+	\draw (0,0) -- (2,0);
+	\draw (0,1) -- (3,1);
+	\draw (1,0) circle (0.15);
+	\filldraw[fill=black] (1,1) circle(0.07);
+	\draw (1,-0.15) -- (1,1);
+
+	\draw (2,-0.05) -- (3,-0.05);
+	\draw (2,0.05) -- (3,0.05);
+		\node at (2,0) {\meas};
+	\end{tikzpicture}
+	\end{center}
+	where the measurement is in the computational basis. On the top wire, the output state should be of the form $X^cZ^dT\ket\psi$, i.e., a quantum one-time pad encryption of $T\ket\psi$.
+	\end{subex}
+	\begin{subex}
+	Bob will send the measurement outcome back to Alice. Describe how Alice can compute the new key $c,d$ from that outcome, combined with her knowledge of $a$ and $b$.
+	\end{subex}
+\end{exercise}
+
+
+\end{document}

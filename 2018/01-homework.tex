@@ -1,0 +1,81 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{1}
+\newcommand\deadline{Friday June 15, 2018, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\homeworkproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Canvas no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+
+\begin{exercise}[Purity]
+The purity of a quantum state is defined as $\Tr\rho^2$. Consider a $d$-dimensional quantum state $\rho\in \mathbb{C}^{d\times d}$.
+\begin{subex}
+What is the maximal value of purity and what class of states achieves this value? Prove your answer.
+\end{subex}
+\begin{subex}
+What is the minimal value of purity, what state achieves this value? Prove your answer.
+\end{subex}
+
+\begin{subex}
+Any qubit density matrix can be represented by the Bloch vector $\vec{r}$, satisfying $|\vec{r}|\leq 1$. For any quantum state $\tau\in \mathbb{C}^{2\times 2}$ we have that $\tau= \frac{1}{2}\left( \mathbbm{1} + \vec{r}\cdot \vec{\sigma} \right)$, where $\vec{\sigma}=(\sigma_x,\sigma_y,\sigma_z)^T$ is the vector of Pauli matrices. How does the purity of $\tau$ relate to $\vec{r}$?
+\end{subex}
+
+\end{exercise}
+
+
+
+\begin{exercise}[Parity measurements (Exercise 1.5.1)]
+Use a projective measurement to measure the parity, in the Hadamard basis, of
+the state $\proj{00}$. Compute the probabilities of obtaining measurement outcomes "even" and
+"odd", and the resulting post-measurement states. What would the post-measurement states have
+been if you had first measured the qubits individually in the Hadamard basis, and then taken the
+parity?
+\end{exercise}
+
+
+
+\begin{exercise}[A three-player game]
+Consider the following three-player game: Alice, Bob, and Charlie each receive one bit ($x$, $y$, and $z$, respectively). They are promised that the parity of the three bits is 1 (i.e., $(x,y,z) \in \{(0,0,1), (0,1,0), (1,0,0), (1,1,1)\}$). Their task is to each output a single bit ($a$, $b$, and $c$), such that $a \oplus b \oplus c = xyz$.
+
+
+\begin{subex}
+Find a classical strategy for Alice, Bob, and Charlie, and prove that it is optimal.
+\end{subex}
+
+\begin{subex}
+As you might expect, they can do better if they are allowed to share entanglement. Suppose that the players each hold one qubit of the state $\ket{GHZ_3} = \frac{1}{\sqrt{2}}(\ket{000} + \ket{111})$. Find a strategy so that the game is won with certainty.
+\\\textbf{Hint:} Their first step should be to change their resource state into $\frac{1}{\sqrt{2}}(\ket{000} - \ket{111})$ if and only if $(x,y,z) = (1,1,1)$.
+\end{subex}
+
+\end{exercise}
+
+\begin{exercise}[Relation between min-entropy and ignorance]
+	Let $K$ be a classical (key) register, and let $E$ be Eve's quantum register. Prove the following statement for arbitrary classical-quantum states $\rho_{KE}$: Eve is ignorant about $K$ if and only if $H_{min}(K|E) = \log|K|$.
+\end{exercise}
+
+
+
+
+
+\end{document}

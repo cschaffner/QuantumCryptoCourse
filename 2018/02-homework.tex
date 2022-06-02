@@ -1,0 +1,74 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{2}
+\newcommand\deadline{Friday June 23, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\usepackage{mathrsfs} 
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\newcommand{\Hmin}{\mathrm{H}_{\mathrm{min}}}
+
+\homeworkproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+Please hand in your solutions to these exercises in digital form (typed, or scanned from a neatly hand-written version) through Canvas no later than \textbf{\deadline}.  %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+
+\begin{exercise}[XOR-universal hash functions]
+A family $\mathscr{F} = \{f_y : \{0,1\}^n \mapsto \{0,1\}^m\}$ is \emph{XOR-universal} if for all $x \neq x'$ and all $z$,
+\[
+P_y[f_y(x) \oplus f_y(x') = z] = \frac{1}{2^m}.
+\]
+	In words, the XOR of any pair of function values is uniformly distributed over the output space.
+	\begin{subex}
+		Show that if a function family $\mathscr{F}$ is 2-universal, then it is XOR-universal.
+	\end{subex}
+    \begin{subex}
+        Show that the converse of the previous subexercise does not hold by showing that there exists a function that is XOR-universal, but not 2-universal. (\textbf{Hint:} start with an arbitrary 2-universal function and alter it slightly, so that it is not 2-universal anymore.)
+    \end{subex}
+    \begin{subex}
+    	In the lecture notes, it is shown that a 2-universal function family $\mathscr{F}$ can be used to construct a strong seeded randomness extractor (see Theorem 4.3.1; the leftover hash lemma). Is the proof (for the case with no side information) still valid if a XOR-universal function family is used to build the extractor?
+    \end{subex}
+\end{exercise}
+
+\begin{exercise}[Min-Entropy Chain rule for cq-states]
+Let $\rho_{XE} = \sum_x P_X(x) \ket{x}\bra{x} \otimes \rho_E^x$ be a cq-state. Prove the following chain rule:
+\[
+\Hmin(X | E) \geq \Hmin(X) - \log |E| \, .
+\]
+\textbf{Hint: } Use the fact that $0 \leq \rho_E^x \leq \mathbbm{1}$.
+
+\end{exercise}
+
+\begin{exercise}[Intermediate-basis attack]
+Analyze the intercept-and-resend attack on BB84 protocol in which Eve measures in the basis intermediate between the computational and Hadamard bases, i.e. $\{\ket{\frac{\pi}{4}},\ket{\frac{5\pi}{4}} \}$, where $\ket{\frac{\pi}{4}}:=\cos(\pi/8)\ket{0}+\sin(\pi/8)\ket{1}$, and $\ket{\frac{5\pi}{4}}:=-\sin(\pi/8)\ket{0}+\cos(\pi/8)\ket{1}$. What is the error rate this attack induces?
+\end{exercise}
+
+\begin{exercise}[SARG04 Quantum Key Distribution Protocol (Exercise 4.3.4 from \href{https://www.fuw.edu.pl/~demko/Teksty/ik05/2012/qi12.pdf}{the lecture notes to Quantum Information 1/2})]
+A protocol proposed in 2004 is a seemingly innocent variation to BB84 protocol, but has some advantages in realistic implementation of QKD. Alice again sends randomly one of four states used in BB84, and Bob measures randomly in either computational or Hadamard basis. However, instead of revealing the basis, Alice announces publicly one of four pairs $\{ \ket{0},\ket{+} \}$, $\{ \ket{0},\ket{-} \}$, $\{ \ket{1},\ket{+} \}$, $\{ \ket{1},\ket{-} \}$. The announced pair contains the state send by Alice but it is not revealed which one. The convention is that $\ket{+}$, $\ket{-}$ are assigned logical value 0 while $\ket{0}$, $\ket{1}$ logical value 1. To understand how secret key can be generated consider situation in which Alice sends $\ket{1}$ and announces the pair $\{ \ket{1},\ket{+} \}$, with probability $1/2$ Bob measures in the computational basis and he gets $\ket{1}$. He is not sure, however, which state from the announced pair caused this result so he discards it. With probability $1/2$ he measures in the Hadamard basis in which case half of the time he gets $\ket{+}$ and half of the time he gets $\ket{-}$. Only in the latter case he is sure that the state send by A was $\ket{1}$ and he writes down the bit value 1. What portion of the bits is discarded. Analyze the security of the protocol under random basis intercept-and-resend attack. If the pairs of states had been announced before sending the qubit, could Eve perform a more powerful intercept-and-resend attack? In realistic implementations of QKD we want to send single photons in polarization states, production of single photons is rather hard though. One dangerous thing that might happen is that Alice, instead of one, sends two photons in the same state, giving Eve a copy of the sent state. Explain how does using SARG04 help with this issue.
+\end{exercise}
+
+
+
+\begin{exercise}[Injective functions are collapsing]
+Show that an injective function is collapsing, i.e. give a proof of Lemma~4 of \href{https://eprint.iacr.org/2017/771.pdf}{our recent paper}. You can ignore the oracles $\mathcal{O}$ in the statement of Lemma~4 and in Definition~3.
+\end{exercise}
+
+\end{document}

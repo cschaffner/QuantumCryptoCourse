@@ -1,0 +1,186 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{8}
+\newcommand\deadline{Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\newcommand{\Hi}{\mathcal{H}}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[Rabin OT vs 1-2 OT]
+Show how to obtain Rabin Oblivious Transfer when given 1-2 OT and vice versa.
+\end{exercise}
+
+\begin{exercise}[weak and strong coin flipping, Problem 8.5.1]
+A strong coin-flipping protocol immediately implies a weak coin-flipping protocol with the same bias. However, we can also derive a strong coin-flipping protocol from a weak one. A simple way to do this is to make the modification that whoever wins the weak coin flip gets to flip its own 50-50 coin (if acting honestly) and announce the final outcome of the protocol. What is the bias of this strong coin-flipping protocol, if the weak coin-flipping protocol had bias $\varepsilon$?
+\end{exercise}
+
+
+\begin{exercise}[A Weak Coin-Flipping Protocol] %  (Homework 1 of Chapter 8)
+In this week's lectures, you have been presented with an example of a strong quantum coin-flipping protocol with bias $1/4$. In this problem you'll see how a variation of that same protocol allows to construct a weak coin-flipping protocol with bias smaller than $1/4$. This is still far from the best weak coin-flipping protocol that we know of (in fact weak coin-flipping protocols exist with arbitrarily small bias), but it is still instructive to consider, and to go through its security. 
+Recall that in a weak coin-flipping protocol, one of the outcomes is identified with "Alice wins" and the other with "Bob wins", so each player hopes for just one of the two outcomes. In this context, for a cheating Alice and honest Bob, we define Alice's cheating probability as $P^*_A=\Pr[\text{Alice wins}]$, maximized over Alice's (cheating) strategies, and similarly $P_B^∗$ for Bob, and we say that the cheating probability of the protocol is $\max\{P_A^∗,P_B^∗\}$. The protocol in this problem is parametrised by $\alpha \in [0,\pi]$, over which you'll optimise later on. 
+We use the term "qutrit" to refer to a quantum state in the space $\mathbb{C}^3$, i.e.\ a state of the form $\alpha_0\ket{0}+\alpha_1\ket{1} + \alpha_2 \ket{2}$. For $a,x \in \{0,1\}$, define the qutrit state $\ket{\psi_{a,x}}$ in the space $\mathcal{H}_t = \mathbb{C}^3$ as
+\[
+\ket{\psi_{a,x}} = \cos(\frac{\alpha}{2}) \ket{0} + \sin(\frac{\alpha}{2}) (-1)^x \ket{a+1}
+\]
+and $\ket{\psi_a} \in \mathcal{H}_s \otimes \mathcal{H}_t = \mathbb{C}^2 \otimes \mathbb{C}^3$ as 
+\[
+\ket{\psi_a} = \frac{1}{\sqrt{2}} ( \ket{0} \ket{\psi_{a,0}} + \ket{1} \ket{\psi_{a,1}} ) \, .
+\]
+
+The protocol runs as follows:
+\begin{enumerate}
+\item Alice picks $a \in_R \{0,1\}$, prepares the state $\ket{\psi_a} \in \mathcal{H}_s \otimes \Hi_t$ (i.e.\ a state of one qubit and one qutrit) and sends to Bob the right half of the state (the qutrit).
+\item Bob picks $b \in_R \{0,1\}$ and sends it to Alice.
+\item Alice then reveals the bit $a$ to Bob. Let $c=a \oplus b$. If $c=0$, then Alice sets $c_A=0$ and sends to Bob the other part of the state $\ket{\psi_a}$ (the qubit). Bob checks that the qutrit-qubit pair he received is indeed in the state $\ket{\psi_a}$ (by taking a measurement with respect to any orthogonal basis of $\Hi_s \otimes \Hi_t$ containing $\ket{\psi_a}$). If the test is passed, Bob sets $c_b=0$, and so Alice wins, else Bob concludes that Alice has deviated from the protocol, and aborts.
+\item If, on the other hand, $c=a \oplus b=1$, then Bob sets $c_B=1$, and returns the qutrit he received in round 1. Alice checks that her qubit-qutrit pair is in state $\ket{\psi_a}$. If the test is passed, she sets $c_A=1$ so Bob wins the game, else Alice concludes that Bob has tampered with her qutrit to bias the game, and aborts.
+\end{enumerate}
+
+It is clear that if both players are honest, then the protocol is fair. We'll analyse what happens when one of the players cheats and the other is honest.
+
+\begin{subex}
+What is Bob's reduced density matrix $\rho_a$ after step 1, in the case that Alice has prepared the honest state $\ket{\psi_a}$? (note that the subscript $a$ refers to the classical bit and not the system of Alice or Bob.)
+\end{subex}
+
+\begin{subex}
+Now, suppose Bob is honest and Alice potentially cheats. We intend to obtain a (tight) bound on Alice's winning probability. 
+The most general strategy is for Alice to prepare a pure state $\ket{\phi} \in \Hi \otimes \Hi_s \otimes \Hi_t$ where $\Hi$ is an auxiliary space (one can always purify the state via $\Hi$). Then she sends the qutrit part in $\Hi_t$ to Bob, and keeps the part of the state in $\Hi \otimes \Hi_s$. 
+We can assume without loss of generality that in step 3 of the protocol Alice always replies with $a=b$ (so that $c=0$), and consequently tries to pass Bob's check. For this, she performs a unitary $U_b$ on her part of $\ket{\phi}$, so that she gets $\ket{\phi_b}=(U_b \otimes I) \ket{\phi}$, and then sends the qubit in $\Hi_s$ to Bob. The final joint state can then be written as $\ket{\phi_b} = \sum_i \sqrt{p_i} \ket{i} \ket{\phi_{i,b}}$ for some $p_i$'s and Schmidt bases $\{ \ket{i} \}$ of $\Hi$ and $\{ \ket{\phi_{i,b}} \}$ of $\Hi_s \otimes \Hi_t$. 
+
+Now, recall the interpretation of the fidelity between to density matrices as the square root of the probability that Alice can convince Bob that one is the other. Let $\sigma_b$ be the density matrix of Bob's qubit-qutrit pair at the end of the protocol. And let $\sigma$ be Bob's reduced density matrix after the first step of the protocol (i.e.\ just the qutrit).
+
+Prove the following upper bound on the probability that Alice wins given that Bob sent $b$:
+\[
+\Pr[\text{Alice wins} \mid \text{Bob sent $b$}] \leq F^2(\sigma, \rho_b) \, .
+\]
+\textbf{Hint: }express it first in terms of the fidelity of two density matrices and then use the fact that fidelity is non-decreasing under taking partial trace.
+\end{subex}
+
+\begin{subex}
+Remember the property of fidelity that for any three density matrices $\sigma, \rho_0, \rho_1$, it holds that $F^2(\sigma, \rho_0) + F^2(\sigma, \rho_1) \leq 1 + F(\rho_0, \rho_1)$
+Use this fact to upper-bound the probability that Alice wins in terms of $\alpha$.
+\end{subex}
+
+\begin{subex}
+Now, we turn to Bob's winning probability when he is potentially cheating and Alice is honest. 
+He will be trying to infer as much as he can about the value of the bit $a$, so that he can send back a bit $b$ such that $a \oplus b=1$, at the same time trying to cause as little disturbance as possible to the joint state $\ket{\psi_a}$, so as to pass Alice's final check.
+
+The most general strategy that he can employ is to perform a unitary $U$ on the space $\Hi_t \otimes \Hi \otimes \mathbb{C}^2$ of the qutrit he received from Alice in $\Hi_t$, some auxiliary qubits in $\Hi$ and a qubit reserved for his reply. He then measures the last qubit and sends the outcome as $b$ to Alice. 
+Suppose without loss of generality that the unitary is such that
+\[
+U: \ket{i} \ket{\overline{0}} \ket{0} \mapsto \ket{\xi_{i,0}} \ket{0} + \ket{\xi_{i,1}} \ket{1}
+\]
+where $\ket{\overline{0}}$ is the initial state of the auxiliary qubits, and for some states $\ket{\xi_{i,0}}, \ket{\xi_{i,1}}$, not necessarily orthogonal, such that $\| \ket{\xi_{i,0}} \|^2 + \| \ket{\xi_{i,1}} \|^2 = 1$.
+
+Show the following upper bound for the probability that Bob wins given that Alice sent $a$:
+\[
+\begin{split}
+&\Pr[\text{Bob wins} \mid \text{Alice picked $a$}] \\
+&\quad \leq \left| \cos^2(\frac{\alpha}{2}) (\bra{0} \otimes \mathbbm{1}) \ket{\xi_{0,\overline{a}}} + \sin^2(\frac{\alpha}{2}) (\bra{a+1} \otimes \mathbbm{1}) \ket{\xi_{a+1,\overline{a}}} \right|^2
+\end{split}
+\]
+\end{subex}
+
+\begin{subex}
+Use the above to conclude that 
+\[
+\Pr[\text{Bob wins} \mid \text{Alice picked $a$}] \leq \left( \cos^2(\frac{\alpha}{2}) \| \ket{\xi_{0,\overline{a}}} \| +  \sin^2(\frac{\alpha}{2}) \right)^2 \, .
+\]
+\end{subex}
+
+
+\begin{subex}
+Maximize over the choice of $\ket{\xi_{0,0}}$ and $\ket{\xi_{0,1}}$ to obtain that
+\[
+\Pr[\text{Bob wins} ] \leq \left( \frac{1}{\sqrt{2}} \cos^2(\frac{\alpha}{2}) + \sin^2(\frac{\alpha}{2}) \right)^2 \, .
+\]
+\end{subex}
+
+\begin{subex}
+Now, you may assume that the upper bounds you found for Alice and Bob's winning probabilities are both tight, i.e. there's a cheating strategy for each of Alice and Bob that achieves those bounds.
+
+Determine the value of the parameter $\alpha$ that minimizes the overall bias of the protocol. What is the bias?
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[A Simple Quantum Bit Commitment Protocol] % , Homework 2 of Chapter 8
+As you know very well by now, perfectly secure quantum bit commitment is impossible. Nonetheless, it is possible to construct protocols in which Alice and Bob can cheat to some extent, but not completely. 
+
+For a cheating Alice and honest Bob, we define Alice's cheating probability as $P_A^* = \frac12(\Pr[\text{Alice opens $b=0$ successfully}]+ \Pr[\text{Alice opens $b=1$ successfully}])$, maximized over Alice's (cheating) strategies. For a cheating Bob and an honest Alice, instead, we let Bob's cheating probability be
+$P_B^*= \Pr[\text{Bob guesses $b$ after the commit phase}]$, maximized over Bob's (cheating) strategies. The cheating probability of the protocol as a whole is then defined as $\max\{P_A^*,P_B^*\}$. In this question, we introduce a simple example of such a protocol:
+
+In the \emph{commit phase}, Alice commits to bit $b$ by preparing the state 
+$\ket{\psi_b}= \sqrt{\alpha} \ket{bb} + \sqrt{1-\alpha} \ket{22}$, and sending the second qutrit to Bob. In the \emph{open phase}, she reveals the classical bit $b$ and sends the first qutrit over to Bob, who checks that the pure state is the correct one, by making a measurement with respect to any orthogonal basis containing $\ket{\psi_b}$.
+
+\begin{subex}
+What is the density matrix $\rho_b$ that Bob has after the commit phase if Alice has commited to bit $b$ and honestly prepared state $\ket{\psi_b}$?
+\end{subex}
+
+\begin{subex} \label{subex:bob}
+Compute Bob's cheating probability $P_B^*$ by recalling the operational interpretation of trace distance.
+\end{subex}
+
+% \begin{subex}
+% Next, let's calculate Alice's cheating probability. Let the underlying Hilbert space be $\Hi \otimes \Hi_s \otimes \Hi_t$, where $\Hi_t$ corresponds to the qutrit that is sent to Bob in the commit phase, $\Hi_s$ to the qutrit that is sent during the opening phase, and $\Hi$ is any auxiliary system that Alice might use. For the most general strategy, we can assume that she prepares the pure state $\ket{\phi}$, as it can always be purified on $\Hi$.
+
+% We can write $\ket{\phi} = \sum_i \sqrt{p_i} \ket{i} \ket{\tilde{\psi}_{i,b}}$ where $\{\ket{i}\}$ and $\{ \ket{\tilde{\psi}_{i,b}} \}$ are Schmidt bases of $\Hi$ and $\Hi_s \otimes \Hi_t$ respectively. Note that depending on the bit $b$ Alice tries to open, she can use a different Schmidt basis of $\Hi_s \otimes \Hi_t$. Hence, the reduced density matrix on $\Hi_s \otimes \Hi_t$ is $\sigma^b_{s,t} = \sum_i p_i \ket{\tilde{\psi}_{i,b}}\bra{\tilde{\psi}_{i,b}}$. However, the part in $\Hi_t$ which is sent to Bob in the commitment phase does not depend on $b$ and we use $\sigma_t$ to denote Bob's reduced density matrix after the commit phase, i.e. just a qutrit.
+% Now, compute the probability of dishonest Alice successfully opening bit $b$ in terms of the squared fidelity between the states $\ket{\psi_b}$ and $\sigma^b_{s,t}$.
+% \end{subex}
+
+% \begin{subex}
+% Then give the following upper bound on Alice's cheating probability:
+% \[
+% P_A^* \leq \frac12 \left( F^2(\sigma_t, \rho_0) + F^2(\sigma_t,\rho_1) \right)
+% \]
+
+% \textbf{Hint: } use the fact that the fidelity is non-decreasing under taking partial trace, in particular tracing out system $\Hi_s$.
+
+% \end{subex}
+
+% \begin{subex}
+% Remember the property of fidelity that for any three density matrices $\rho_1, \rho_2, \rho_3$, it holds that $F^2(\rho_1, \rho_2) + F^2(\rho_1, \rho_3) \leq 1 + F(\rho_2, \rho_3)$. Give an upper bound to Alice's cheating probability in terms of $\alpha$.
+% \end{subex}
+
+\begin{subex}
+Argue that the bound on Bob's cheating probability that you obtained in Problem~(\ref{subex:bob}) is tight.
+\end{subex}
+
+\bigskip \noindent
+This protocol will be continued in a similar fashion as in the previous problem in the homework.
+
+% t, since it is the best possible probability of distinguishing between two known states, and he knows what the two states are when Alice is honest. 
+
+% Importantly, the bound above on Alice's cheating probability that we just obtained is also tight. There is a simple cheating strategy that allows Alice to achieve this bound, without even making use of the auxiliary system $\Hi$. What state(s) of two qutrits can she prepare?
+% \end{subex}
+
+% \begin{subex}
+% Finally, by combining the calculations so far on Alice and Bob's cheating probabilities, determine the $\alpha$ that minimizes the overall cheating probability of the protocol. What is the overall cheating probability?
+% \end{subex}
+
+\end{exercise}
+
+
+
+\end{document}
