@@ -1,0 +1,108 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+
+%% Settings
+\newcommand\problemset{0}
+\newcommand\deadline{UPDATE! Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+
+\begin{document}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[Inner product]
+For two $d$-dimensional complex vectors $\ket{a}$ and $\ket{b}$, the
+inner product $\langle a | b \rangle$ is defined as $\langle a | b
+\rangle := \langle a || b \rangle = \sum_{i=1}^d a^*_ib_i$. Show that $|\langle a | b\rangle|^2 = \langle a | b \rangle\langle b | a \rangle$.
+\end{exercise}
+
+\begin{exercise}[Valid quantum state]
+Verify that for all $\theta, \varphi \in \mathbb{R}$, $\cos(\theta) \ket{0} + \sin(\theta)e^{i\varphi}\ket{1}$ is a valid qubit state.
+\end{exercise}
+
+\begin{exercise}[Changing basis]
+Express $\ket1$ in the Hadamard basis. That is, find coefficients $\alpha$ and $\beta$ such that $\ket1 = \alpha \ket+ + \beta \ket-$.
+\end{exercise}
+
+\begin{exercise}[Measurement]
+Consider the state $\ket\psi = \frac{1}{\sqrt{3}}\ket0 + \sqrt{\frac{2}{3}}\ket1$. What are the probabilities $p_0, p_1$ when we measure $\ket\psi$ in the standard basis? What are the probabilities $p_+, p_-$ when we measure $\ket\psi$ in the Hadamard basis?
+\end{exercise}
+
+\begin{exercise}[Pauli operations]
+\begin{subex}
+Write down the Pauli matrices $X, Y$, and $Z$.
+\end{subex}
+\begin{subex}
+Verify that they are unitary.
+\end{subex}
+\begin{subex}
+What rotations of the Bloch sphere do the Paulis represent?
+\end{subex}
+\end{exercise}
+
+\begin{exercise}[Density operators]
+Which of the following matrices can be interpreted as density operators? The definition of a density operator can be found in the lecture notes of Chapter 1.
+\begin{subex}
+\[
+\left(
+\begin{array}{c c}
+\frac{1}{4}& \frac{3}{4}\\
+\frac{3}{4}& \frac{3}{4}
+\end{array}
+\right)
+\]
+\end{subex}
+\begin{subex}
+$\frac{1}{3}\ket{u}\bra{u} + \frac{2}{3}\ket{v}\bra{v} + \frac{\sqrt{2}}{3}\ket{u}\bra{v} + \frac{\sqrt{2}}{3}\ket{v}\bra{u}$, where $\ket{u}$ and $\ket{v}$ form an orthonormal basis.
+\end{subex}
+\begin{subex}
+\[
+\left(
+\begin{array}{c c c}
+\frac{1}{2}& 0 & \frac{1}{4}\\
+0 & \frac{1}{2} & 0\\
+\frac{1}{4} & 0 & 0\\
+\end{array}
+\right)
+\]
+\end{subex}
+\begin{subex}
+\[
+\left(
+\begin{array}{c c c}
+\frac{1}{2}& 0 & \frac{1}{4}\\
+0 & \frac{1}{2} & 0\\
+\frac{1}{4} & 0 & \frac{1}{4}\\
+\end{array}
+\right)
+\]
+\end{subex}
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[a4paper,10pt,landscape,twocolumn]{scrartcl}
+
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\proj}[1]{| #1 \rangle \langle #1 |}
+\newcommand{\Tr}{\text{Tr}}
+
+%% Settings
+\newcommand\problemset{1}
+\newcommand\deadline{Friday November 18th, 20:00h}
+\newif\ifcomments
+\commentsfalse % hide comments
+%\commentstrue % show comments
+
+% Packages
+\usepackage[english]{exercises}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor = blue, linkcolor = blue}
+\usepackage{bbm}
+\begin{document}
+
+\practiceproblems
+
+{\sffamily\noindent
+%This week's exercises deal with sets, counting and uniform probabilities.
+You do not have to hand in these exercises, they are for practicing only. %Problems marked with a $\bigstar$ are generally a bit harder.
+}
+
+\begin{exercise}[Quantum one time pad (Problem 3.1)]
+%In class you saw that you needed two classical bits of key to encrypt one quantum bit. (One for applying a $Z$ operation and one for applying an $X$ operation). This was necessary because the $X$ operation has no effect on the $\ket{+}$ state and the operation $Z$ has no effect on the $\ket{0}$ state. 
+Alice claims she has come up with a clever idea for a protocol that uses only one bit of key per qubit. She will, instead of an $X$ or a $Z$ operation apply the Hadamard operation $H$ which has the properties $H\ket{0}=\ket{+}$ and $H\ket{+}=\ket{0}$. Hence she can avoid the problem of leaving either standard basis states or Hadamard basis states unchanged by the encryption, while only using one bit of key (for deciding whether or not to apply $H$) per qubit. Before Alice rushes to publish this beautiful discovery it might be worthwhile to check if this encryption actually works.
+\end{exercise}
+
+\begin{exercise}[Minimum-error measurement of qubits]
+Alice is given one of the states $\ket{\theta}:=\cos\left(\frac{\theta}{2}\right)\ket{0}+\sin\left(\frac{\theta}{2}\right)\ket{1}$, $\ket{-\theta}=\cos\left(\frac{\theta}{2}\right)\ket{0}-\sin\left(\frac{\theta}{2}\right)\ket{1}$, each with probability $p:=\frac{1}{2}$. Design a measurement $\{ \Pi_{+},\Pi_{-}\}$, where $\Pi_{+},\Pi_{-}\succeq 0$ and $\Pi_{+}+\Pi_{-}= \mathbbm{1}$, such that the probability of error is minimal. The probability of error is defined as $p_e:= p\Tr(\Pi_{-}\proj{\theta})+(1-p)\Tr(\Pi_{+}\proj{-\theta})$.
+\end{exercise}
+
+\begin{exercise}[Unambiguous measurements of qubits]
+Alice is given one of the states $\ket{\theta}:=\cos\left(\frac{\theta}{2}\right)\ket{0}+\sin\left(\frac{\theta}{2}\right)\ket{1}$, $\ket{-\theta}=\cos\left(\frac{\theta}{2}\right)\ket{0}-\sin\left(\frac{\theta}{2}\right)\ket{1}$, each with probability $p:=\frac{1}{2}$. Design such a measurement that Alice never misidentifies the states. Consider a POVM $\{ \Pi_{+},\Pi_{-},\Pi_{?}\}$, where $\Pi_{+},\Pi_{-},\Pi_{?}\succeq 0$ and $\Pi_{+}+\Pi_{-}+\Pi_{?}= \mathbbm{1}$. Alice also wants to get the outcome $?$ with the lowest probability possible.
+\end{exercise}
+
+
+\begin{exercise}[Parity measurements (Exercise 1.5.1)]
+Use a projective measurement to measure the parity, in the Hadamard basis, of
+the state $\proj{00}$. Compute the probabilities of obtaining measurement outcomes "even" and
+"odd", and the resulting post-measurement states. What would the post-measurement states have
+been if you had first measured the qubits individually in the Hadamard basis, and then taken the
+parity?
+\end{exercise}
+
+\begin{exercise}[Partial trace (Exercise 1.6.1)]
+Verify that the state $\rho_A=\sum_x (\mathbbm{1}\otimes \bra{u_x})\rho_{AB}(\mathbbm{1}\otimes \ket{u_x})$ does not depend on the choice of
+basis $\{\ket{u_x}\}$. [Hint: first argue that if two density matrices $\rho$, $\sigma$ satisfy $\bra{\phi}\rho\ket{\phi}=\bra{\phi}\sigma\ket{\phi}$ 
+for all unit vectors $\ket{\phi}$ then $\rho=\sigma$. Then compute $\bra{\phi}\rho_A\ket{\phi}$, and use the POVM condition
+$\sum_x M_x=\mathbbm{1}$ to check that you can get an expression independent of $\{\ket{u_x}\}$. Conclude that $\rho_A$
+itself does not depend on $\{\ket{u_x}\}$.]
+\end{exercise}
+
+\begin{exercise}[Partial trace of the singlet state (Exercise 1.6.2)]
+If $\rho_{AB}=\proj{\Phi}$ is the singlet $\ket{\Phi}=\frac{1}{\sqrt{2}}\left( \ket{01}-\ket{10} \right)$, compute $\rho_A$ and $\rho_B$.
+\end{exercise}
+
+
+
+\begin{exercise}[Robustness of GHZ and W states (Problem 6.1)]
+\begin{subex}
+ Now we generalize to the N-qubit case. As you might expect, $\left| GHZ_ N \right\rangle =\frac{1}{\sqrt {2}} (\left| 0 \right\rangle ^{\otimes N}+\left| 1 \right\rangle ^{\otimes N})$ .
+
+What is the overlap $\text {Tr}\Big(\left| GHZ_{N-1} \right\rangle\left\langle {GHZ_{N-1}}\right| \text {tr}_ N\left(\left| GHZ_ N \right\rangle \left\langle GHZ_ N \right|\right)\Big)$ in the limit $N \rightarrow \infty$? 
+\end{subex}
+
+\begin{subex}
+$\left| W_ N \right\rangle= \frac{1}{\sqrt{N}}\sum_{i=1}^N \underset{1\text{ at the $i$-th place}}{\underbrace{\ket{0\cdots 010\cdots 0}}}$ is an equal superposition of all N-bit strings with exactly one 1 and N-1 0's
+
+What is the overlap $\text {Tr}\Big(\left| W_{N-1} \right\rangle \left\langle {W_{N-1}}\right| \text {tr}_ N\left(\left| W_ N \right\rangle \left\langle W_N \right|\right)\Big)$ in the limit $N \rightarrow \infty$? 
+\end{subex}
+\end{exercise}
+
+
+
+
+
+\end{document}
